@@ -5,6 +5,8 @@
 # Goal: Random Number game. 
 
 
+## This is spaghetti code. Please change to include a limited amount of tries and error validation using truthy and falsey values. - matteo
+
 import random
 
 # Number Inquiry Function Creation (w/ Input Error Checking)
@@ -46,4 +48,3 @@ print('Great job, the number was:' + str(randomNumber))
 
 
 
-## This is spaghetti code. Please change to include a limited amount of tries and error validation using truthy and falsey values. - matteo
