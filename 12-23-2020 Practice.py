@@ -21,17 +21,26 @@ print("Welcome " + name + '.')
 
 
 #Number Inquiry
+#for (attempts) not in range(0,MAX_GAME_ATTEMPTS):
+#Please verify why the above commented syntax doesn't work.
 for attempts in range(MAX_GAME_ATTEMPTS,1000) or range(-1000,MAX_GAME_ATTEMPTS):
     print("Please input a number between 1 and 20.")
-    
-    #User Input Validation
-    numberAttempt = 0
-    try: #Checks if user input is in valid numerical range.
-        
-    except: #Checks if user input is valid data type.
-    
+    number = input()
 
-#Game logic, compares user inputed integer to randomly generated number.
+    #User Input Validation
+    #for int(number) not in range(LOW_RAND_NUM_LIM, UP_RAND_NUM_LIM):
+    #Please verify why the above commented syntax doesn't work.
+    numberAttempt = 0
+    for number in range(-1000,LOW_RAND_NUM_LIM) or range(UP_RAND_NUM_LIM,1000):
+        #print('Input error, please enter a number between ' str(LOW_RAND_NUM_LIM) +'and ' + str(UP_RAND_NUM_LIM) +'.')
+        print('Input error, please enter a number between ')
+        number = input()
+        numberAttempt = numberAttempt + 1
+        if numberAttempt >= NUM_VALIDATION_ATTEMPTS:
+            print("Please learn to read.")
+            sys.exit()
+
+    #Game logic, compares user input to randomly generated number.
     if int(number) == randomNumber:
         print("Great job, you guessed correctly!")
         break
@@ -42,6 +51,4 @@ for attempts in range(MAX_GAME_ATTEMPTS,1000) or range(-1000,MAX_GAME_ATTEMPTS):
     attempts = attempts + 1
 
 print("Random number was " + str(randomNumber))
-sys.exit()
-
 
