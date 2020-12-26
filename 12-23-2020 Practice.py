@@ -21,26 +21,26 @@ print("Welcome " + name + '.')
 
 
 #Number Inquiry
-#for (attempts) not in range(0,MAX_GAME_ATTEMPTS):
-#Please verify why the above commented syntax doesn't work.
 for attempts in range(MAX_GAME_ATTEMPTS,1000) or range(-1000,MAX_GAME_ATTEMPTS):
     print("Please input a number between 1 and 20.")
     number = input()
-
+    
     #User Input Validation
-    #for int(number) not in range(LOW_RAND_NUM_LIM, UP_RAND_NUM_LIM):
-    #Please verify why the above commented syntax doesn't work.
-    numberAttempt = 0
-    for number in range(-1000,LOW_RAND_NUM_LIM) or range(UP_RAND_NUM_LIM,1000):
-        #print('Input error, please enter a number between ' str(LOW_RAND_NUM_LIM) +'and ' + str(UP_RAND_NUM_LIM) +'.')
-        print('Input error, please enter a number between ')
-        number = input()
-        numberAttempt = numberAttempt + 1
-        if numberAttempt >= NUM_VALIDATION_ATTEMPTS:
-            print("Please learn to read.")
-            sys.exit()
+    try: #Checking if user's integer input is between the random number bounds.
+        numberAttempt = 0
+        for number in range(-1000,LOW_RAND_NUM_LIM) or range(UP_RAND_NUM_LIM,1000):
+            print('Input error, please enter a number between ' + str(LOW_RAND_NUM_LIM) +' and ' + str(UP_RAND_NUM_LIM) +'.')
+            number = input()
+            numberAttempt = numberAttempt + 1
+            if numberAttempt >= NUM_VALIDATION_ATTEMPTS:
+                print("Please learn to read.")
+                sys.exit()
+    except: #Checking if user inputed valid data type.
+        #ToDo create loop w/ three attempts. 
+        print('Data Type Error, exiting.')
+        sys.exit() 
 
-    #Game logic, compares user input to randomly generated number.
+    #Game logic, compares user input to randomly generated number. Assumes correct user input.
     if int(number) == randomNumber:
         print("Great job, you guessed correctly!")
         break
