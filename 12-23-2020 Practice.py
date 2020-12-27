@@ -22,24 +22,29 @@ print("Welcome " + name + '.')
 
 #Number Inquiry
 for attempts in range(1,MAX_GAME_ATTEMPTS):
-    print("Please input a number between 1 and 20.")
+    print("Please input a whole number between 1 and 20.")
     number = input()
     
     #User Input Validation
-    #try: Checking if user's integer input is between the random number bounds.
-    numberAttempt = 0
-    while int(number) not in range(LOW_RAND_NUM_LIM,UP_RAND_NUM_LIM):
-        print('Input error, please enter a number between ' + str(LOW_RAND_NUM_LIM) +' and ' + str(UP_RAND_NUM_LIM) +'.')
-        number = input()
-        numberAttempt = numberAttempt + 1
-        if numberAttempt >= NUM_VALIDATION_ATTEMPTS and int(number) not in range(LOW_RAND_NUM_LIM,UP_RAND_NUM_LIM):
-            print("Maximum invalid range attempts recieved, terminating program.")
-            sys.exit()
+    try: #Checking if user's integer input is between the random number bounds.
+        numberAttempt = 0
+        while int(number) not in range(LOW_RAND_NUM_LIM,UP_RAND_NUM_LIM):
+            print('Input error, please enter a whole number between ' + str(LOW_RAND_NUM_LIM) +' and ' + str(UP_RAND_NUM_LIM) +'.')
+            number = input()
+            numberAttempt = numberAttempt + 1
+            if numberAttempt >= NUM_VALIDATION_ATTEMPTS and int(number) not in range(LOW_RAND_NUM_LIM,UP_RAND_NUM_LIM):
+                print("Maximum invalid range attempts recieved, terminating program.")
+                sys.exit()
 
-    #except: #Checking if user inputed valid data type.
-        #ToDo create loop w/ three attempts. 
-   #     print('Data input error, exiting.')
-   #     sys.exit() 
+    except ValueError: #Occurs when user inputs a non-integer value (Ex: a, #, 3.14159)
+        print("\n"*2 + str(sys.exc_info()))
+        print('Program terminating -- only enter whole numbers between ' + str(LOW_RAND_NUM_LIM) + ' and ' + str(UP_RAND_NUM_LIM) + '.' + "\n"*2)
+        sys.exit()
+
+    except: #General error and exit.
+        print("\n"*2 +str(sys.exc_info()))
+        print('Program terminating.' + "\n"*2)
+        sys.exit()
 
     #Game logic, compares error-checked user input to randomly generated number.
     if int(number) == randomNumber:
@@ -52,4 +57,3 @@ for attempts in range(1,MAX_GAME_ATTEMPTS):
 
 print('Thanks for playing, ' + name + '. The random number was ' + str(randomNumber) + '.')
 sys.exit()
-
