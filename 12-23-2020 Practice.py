@@ -7,10 +7,10 @@
 import random
 import sys
 
-MAX_GAME_ATTEMPTS = 7
-NUM_VALIDATION_ATTEMPTS = 3
-LOW_RAND_NUM_LIM = 1
-UP_RAND_NUM_LIM = 20
+MAX_GAME_ATTEMPTS = 7 #The number of rounds the user has to guess the correct answer.
+NUM_VALIDATION_ATTEMPTS = 3 #The number of invald data type enteries the user can attempt to enter.
+LOW_RAND_NUM_LIM = 1 #The lower limit of the randomly generated number.
+UP_RAND_NUM_LIM = 20 #The upper limit of the randomly generated number.
 
 randomNumber = random.randint(LOW_RAND_NUM_LIM,UP_RAND_NUM_LIM)
 
@@ -26,21 +26,22 @@ for attempts in range(1,MAX_GAME_ATTEMPTS):
     number = input()
     
     #User Input Validation
-  #  try: #Checking if user's integer input is between the random number bounds.
+    #try: Checking if user's integer input is between the random number bounds.
     numberAttempt = 0
-    while int(number) not in range(1,20):
+    while int(number) not in range(LOW_RAND_NUM_LIM,UP_RAND_NUM_LIM):
         print('Input error, please enter a number between ' + str(LOW_RAND_NUM_LIM) +' and ' + str(UP_RAND_NUM_LIM) +'.')
         number = input()
         numberAttempt = numberAttempt + 1
-        if numberAttempt >= NUM_VALIDATION_ATTEMPTS:
-             sys.exit()
-        
-   # except: #Checking if user inputed valid data type.
+        if numberAttempt >= NUM_VALIDATION_ATTEMPTS and int(number) not in range(LOW_RAND_NUM_LIM,UP_RAND_NUM_LIM):
+            print("Maximum invalid range attempts recieved, terminating program.")
+            sys.exit()
+
+    #except: #Checking if user inputed valid data type.
         #ToDo create loop w/ three attempts. 
    #     print('Data input error, exiting.')
    #     sys.exit() 
 
-    #Game logic, compares user input to randomly generated number. Assumes correct user input.
+    #Game logic, compares error-checked user input to randomly generated number.
     if int(number) == randomNumber:
         print("Great job, you guessed correctly!")
         break
@@ -48,7 +49,7 @@ for attempts in range(1,MAX_GAME_ATTEMPTS):
         print('Nice try, but your guess was too high. You have ' + str(MAX_GAME_ATTEMPTS - attempts) + ' attempts remaining.')
     else:
         print('Nice try, but your guess was too low. You have ' + str(MAX_GAME_ATTEMPTS - attempts) + ' attempts remaining.')
-    
 
 print('Thanks for playing, ' + name + '. The random number was ' + str(randomNumber) + '.')
+sys.exit()
 
