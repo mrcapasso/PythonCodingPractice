@@ -6,9 +6,9 @@
 #Helpful Libraries: pprint, random, sys, pprint, copy
 #Note: first player to go is X and second player is O
 
-                                            ####PsudeoCode####
+                                                ####PsudeoCode####
 
-#*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*##*#*( Functions )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+#*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*#*#*( Functions PsudeoCode )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 ##First Move Mini Game Function || Input: Rand Number; Output: Human first bool
     #Coinflip? Rand. Number Guessing game?
 
@@ -29,7 +29,7 @@
 ##Hard AI Function || Input:(X/O & Board Data-Structure); Output: Hard AI Board Data-Structure Revision
     #See 'win tictactoe every time algo'
 
-#*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*##*#*( Main Program )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+#*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*##*#*( Main Program PsudeoCode )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 #set default errors attempts to 0
 #Welcome Screen, 
 #Loop 'Play tic tac toe? (y/n)'
