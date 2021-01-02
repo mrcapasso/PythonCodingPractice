@@ -1,18 +1,14 @@
-#Course: Automate the Boring Stuff with Python Programming
-##Section 7: Dictionaries
-##URL: https://www.udemy.com/course/automate/learn/lecture/3465848#overview
-
-#Goal: Create a tic-tac-toe game using functions, data-structures, and lists.
+#Goal: Create a tic-tac-toe game using functions, data-structures, dictionaries, and lists.
 #Helpful Libraries: pprint, random, sys, pprint, copy
-#Note: first player to go is X and second player is O
+#Note: First player to go is X and second player is O
 
                                                 ####PsudeoCode####
 
 #*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*#*#*( Functions PsudeoCode )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
-##First Move Mini Game Function || Input: Rand Number; Output: Human first bool
+##First Move Mini Game Function || Input: Rand Number; Output: Human first bool (COMPLETED)
     #Coinflip? Rand. Number Guessing game?
 
-##Print Gameboard Function || Input: Board Data Structure; Output: Pretty Board Data Structure
+##Print Gameboard Function || Input: Board Data Structure; Output: Pretty Board Data Structure (COMPLETED)
     #Note: Use pretty print library
 
 ##Game Status Checker Function || Input: Board Data-Structure; Output: Winner, Draw, Unfinished
@@ -58,3 +54,53 @@
         #else
             #Exit program. 
 #*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+
+import sys
+import os
+import random
+
+#Demo Data Structure
+boardDataStructure = {'top-left': 'O', 'top-center': 'O', 'top-right': 'X', 'mid-left': 'O', 'mid-center': 'X', 'mid-right': 'O', 'bottom-left': 'X', 'bottom-center': 'O', 'bottom-right': 'X'}
+
+def firstMoveMiniGame(): #Prompts user to play guessing game to determine first move. Returns true or false value if the human won.
+    randomNumber = random.randint(0,10)
+    computerChoice = random.randint(0,10)
+    for i in range(0,3): #Loop for three attempts, used to error check non-valid game inputs.
+        try:
+            print('Please pick a number between 0 and 10.')
+            number = str(input())
+            if abs(randomNumber - int(number)) == abs(randomNumber - computerChoice):
+                os.system('cls')
+                print('You tied!' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
+                print("*Please try again!*") #Human tied, loop.
+                i += 1
+            elif abs(randomNumber - int(number)) < abs(randomNumber - computerChoice):
+                os.system('cls')
+                print('Congrats, you won the guessing game!' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
+                return True #Human won, returns true.
+            else:
+                os.system('cls')
+                print('You lost the guessing game.' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
+                return False #Human lost, returns false.
+        except ValueError: #Error checking for non-integer value.
+            i += 1
+            if i >= 3:
+                os.system('cls')
+                print('Max attempts reached, exiting program.')
+                sys.exit()
+            os.system('cls')
+            print("\n" + '*Incorrect input type. Please try again.*' + "\n")
+        except:
+            os.system('cls')
+            print('Critical error, exiting program.')
+            sys.exit()
+
+def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure and returns it in easy to read format.
+    os.system('cls')
+    print(boardDataStructure.get('top-left', ' ') + ' | ' + boardDataStructure.get('top-center', ' ') + ' | ' + boardDataStructure.get('top-right',' '))
+    print('----------')
+    print(boardDataStructure.get('mid-left', ' ') + ' | ' + boardDataStructure.get('mid-center', ' ') + ' | ' + boardDataStructure.get('mid-right',' '))
+    print('----------')
+    print(boardDataStructure.get('bottom-left', ' ') + ' | ' + boardDataStructure.get('bottom-center', ' ') + ' | ' + boardDataStructure.get('bottom-right',' '))
+    return
+
