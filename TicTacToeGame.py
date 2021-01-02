@@ -58,9 +58,10 @@
 import sys
 import os
 import random
+import pprint
 
 #Demo Data Structure
-boardDataStructure = {'top-left': 'O', 'top-center': 'O', 'top-right': 'X', 'mid-left': 'O', 'mid-center': 'X', 'mid-right': 'O', 'bottom-left': 'X', 'bottom-center': 'O', 'bottom-right': 'X'}
+boardDataStructure = {'top-left': 'O', 'top-center': 'O', 'top-right': 'X', 'mid-left': 'O', 'mid-center': 'X', 'mid-right': 'O', 'bot-left': 'X', 'bot-center': 'O', 'bot-right': 'X'}
 
 def firstMoveMiniGame(): #Prompts user to play guessing game to determine first move. Returns true or false value if the human won.
     randomNumber = random.randint(0,10)
@@ -92,7 +93,7 @@ def firstMoveMiniGame(): #Prompts user to play guessing game to determine first 
             print("\n" + '*Incorrect input type. Please try again.*' + "\n")
         except:
             os.system('cls')
-            print('Critical error, exiting program.')
+            print('Critical error in first move mini game, exiting program.')
             sys.exit()
 
 def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure and returns it in easy to read format.
@@ -101,6 +102,41 @@ def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structu
     print('----------')
     print(boardDataStructure.get('mid-left', ' ') + ' | ' + boardDataStructure.get('mid-center', ' ') + ' | ' + boardDataStructure.get('mid-right',' '))
     print('----------')
-    print(boardDataStructure.get('bottom-left', ' ') + ' | ' + boardDataStructure.get('bottom-center', ' ') + ' | ' + boardDataStructure.get('bottom-right',' '))
+    print(boardDataStructure.get('bot-left', ' ') + ' | ' + boardDataStructure.get('bot-center', ' ') + ' | ' + boardDataStructure.get('bot-right',' '))
     return
 
+
+##Game Status Checker Function || Input: Board Data-Structure; Output: Winner, Draw, Unfinished
+    #Three In Row? 
+        #If yes: count most common element and declare winner.
+        #If no:
+            #Empty Spaces remaining? 
+                #If No: Draw
+                #If Yes: Return Unfinished
+
+def gameStatusChecker(grid): #Inputs board data structure to check game status. Outputs if game is over, drawn, or unfinished. 
+    try: 
+        if ( #This checks for all winning combinations.
+            ((grid.get('top-left') == grid.get('top-center') == grid.get('top-right')) and grid.get('top-left') != '') or  #Checking top row & non-empty 
+            ((grid.get('mid-left') == grid.get('mid-center') == grid.get('mid-right')) and grid.get('mid-left') != '') or  #Checking mid row & non-empty
+            ((grid.get('bot-left') == grid.get('bot-center') == grid.get('bot-right')) and grid.get('bot-left') != '') or  #Checking bot row & non-empty
+            ((grid.get('top-left') == grid.get('mid-left') == grid.get('bot-left')) and grid.get('top-left') != '') or          #Checking left col & non-empty
+            ((grid.get('top-center') == grid.get('mid-center') == grid.get('bot-center')) and grid.get('top-center') != '') or  #Checking mid col & non-empty
+            ((grid.get('top-right') == grid.get('mid-right') == grid.get('bot-right')) and grid.get('top-right') != '') or      #Checking right col & non-empty
+            ((grid.get('top-left') == grid.get('mid-center') == grid.get('bot-right')) and grid.get('top-left') != '') or   #Checking diag left to right & non-empty
+            ((grid.get('top-right') == grid.get('mid-center') == grid.get('bot-left')) and grid.get('top-right') != '')     #Checking diag right to left & non-empty
+            ):
+            print('Winner') #count most common element and declare winner.*******
+        else:
+            #if empty spaces********
+                #return game unfinished******
+            #else******
+                #return game drawn*******
+            print('Draw of unfinished.')
+    except:
+            os.system('cls')
+            print('Critical error in game status checker, exiting program.')
+            sys.exit()
+
+printGameboard(boardDataStructure)
+gameStatusChecker(boardDataStructure)
