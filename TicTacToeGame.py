@@ -60,10 +60,12 @@ import os
 import random
 import pprint
 
-#Demo Data Structure
-boardDataStructure = {'top-left': 'O', 'top-center': 'O', 'top-right': 'X', 'mid-left': 'O', 'mid-center': 'X', 'mid-right': 'O', 'bot-left': 'X', 'bot-center': 'O', 'bot-right': 'X'}
+##ToDo: Finish gameStatusChecker function, verify print works with empty spaces.
 
-def firstMoveMiniGame(): #Prompts user to play guessing game to determine first move. Returns true or false value if the human won.
+#Demo Data Structure (Draw)
+boardDataStructure = {'top-left': 'a', 'top-center': 'a', 'top-right': 'a', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
+
+def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to determine first move. Returns true or false value if the human won.
     randomNumber = random.randint(0,10)
     computerChoice = random.randint(0,10)
     for i in range(0,3): #Loop for three attempts, used to error check non-valid game inputs.
@@ -105,15 +107,6 @@ def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structu
     print(boardDataStructure.get('bot-left', ' ') + ' | ' + boardDataStructure.get('bot-center', ' ') + ' | ' + boardDataStructure.get('bot-right',' '))
     return
 
-
-##Game Status Checker Function || Input: Board Data-Structure; Output: Winner, Draw, Unfinished
-    #Three In Row? 
-        #If yes: count most common element and declare winner.
-        #If no:
-            #Empty Spaces remaining? 
-                #If No: Draw
-                #If Yes: Return Unfinished
-
 def gameStatusChecker(grid): #Inputs board data structure to check game status. Outputs if game is over, drawn, or unfinished. 
     try: 
         if ( #This checks for all winning combinations.
@@ -126,13 +119,13 @@ def gameStatusChecker(grid): #Inputs board data structure to check game status. 
             ((grid.get('top-left') == grid.get('mid-center') == grid.get('bot-right')) and grid.get('top-left') != '') or   #Checking diag left to right & non-empty
             ((grid.get('top-right') == grid.get('mid-center') == grid.get('bot-left')) and grid.get('top-right') != '')     #Checking diag right to left & non-empty
             ):
-            print('Winner') #count most common element and declare winner.*******
+            print('Winner') #count most common element and return winner.*******
         else:
             #if empty spaces********
                 #return game unfinished******
             #else******
                 #return game drawn*******
-            print('Draw of unfinished.')
+            print('Draw or unfinished.')
     except:
             os.system('cls')
             print('Critical error in game status checker, exiting program.')
