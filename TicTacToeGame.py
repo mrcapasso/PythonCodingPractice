@@ -19,8 +19,7 @@
                 #If No: Draw
                 #If Yes: Return Unfinished
 
-##Easy AI Function || Input:(X/O & Board Data-Structure); Output: Easy AI Board Data-Structure Revision
-    #Random Fill Data Structure
+##Easy AI Function || Input:(X/O & Board Data-Structure); Output: Easy AI Board Data-Structure Revision (COMPLETED)
 
 ##Hard AI Function || Input:(X/O & Board Data-Structure); Output: Hard AI Board Data-Structure Revision
     #See 'win tictactoe every time algo'
@@ -63,15 +62,8 @@ import os
 import random
 import pprint
 
-##ToDo: Verify print works with empty spaces.
-
-#Demo Data Structure (Draw)
-#boardDataStructure = {'top-left': 'c', 'top-center': 'a', 'top-right': 'a', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
-
 #Demo Data Structure (Missing Key-Pairs)
 #boardDataStructure = {'top-right': 'X', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
-boardDataStructure = {'top-right': 'X', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
-
 
 def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to determine first move. Returns true or false value if the human won.
     randomNumber = random.randint(0,10)
@@ -83,13 +75,11 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
             if abs(randomNumber - int(number)) == abs(randomNumber - computerChoice):
                 os.system('cls')
                 print('You tied!' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
-                print("*Please try again!*") #Human tied, loop.
+                print("\n"+ "Please try again!") #Human tied, loop.
                 i += 1
             elif abs(randomNumber - int(number)) < abs(randomNumber - computerChoice):
                 os.system('cls')
-                print('Congrats, you won the guessing game!' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
-                global humanFirst #Global variable for use in AI difficulty function.
-                humanFirst = True
+                print('Congrats, you can move first!' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
                 return True #Human won, returns true.
             else:
                 os.system('cls')
@@ -111,26 +101,25 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
 def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure and returns it in easy to read format.
     #os.system('cls')
     print(boardDataStructure.get('top-left', ' ') + ' | ' + boardDataStructure.get('top-center', ' ') + ' | ' + boardDataStructure.get('top-right',' '))
-    print('----------')
+    print('---------')
     print(boardDataStructure.get('mid-left', ' ') + ' | ' + boardDataStructure.get('mid-center', ' ') + ' | ' + boardDataStructure.get('mid-right',' '))
-    print('----------')
+    print('---------')
     print(boardDataStructure.get('bot-left', ' ') + ' | ' + boardDataStructure.get('bot-center', ' ') + ' | ' + boardDataStructure.get('bot-right',' '))
     return
 
 def gameContinuation(grid): #Inputs board data structure to check game status. Outputs true or false bool representing if the game should continue.
     try: 
         if ( #This checks for all winning combinations.
-            ((grid.get('top-left') == grid.get('top-center') == grid.get('top-right')) and grid.get('top-left') != '') or  #Checking top row & non-empty 
-            ((grid.get('mid-left') == grid.get('mid-center') == grid.get('mid-right')) and grid.get('mid-left') != '') or  #Checking mid row & non-empty
-            ((grid.get('bot-left') == grid.get('bot-center') == grid.get('bot-right')) and grid.get('bot-left') != '') or  #Checking bot row & non-empty
-            ((grid.get('top-left') == grid.get('mid-left') == grid.get('bot-left')) and grid.get('top-left') != '') or          #Checking left col & non-empty
-            ((grid.get('top-center') == grid.get('mid-center') == grid.get('bot-center')) and grid.get('top-center') != '') or  #Checking mid col & non-empty
-            ((grid.get('top-right') == grid.get('mid-right') == grid.get('bot-right')) and grid.get('top-right') != '') or      #Checking right col & non-empty
-            ((grid.get('top-left') == grid.get('mid-center') == grid.get('bot-right')) and grid.get('top-left') != '') or   #Checking diag left to right & non-empty
-            ((grid.get('top-right') == grid.get('mid-center') == grid.get('bot-left')) and grid.get('top-right') != '')     #Checking diag right to left & non-empty
+            ((grid.get('top-left') == grid.get('top-center') == grid.get('top-right')) and grid.get('top-left') != None) or  #Checking top row & non-empty 
+            ((grid.get('mid-left') == grid.get('mid-center') == grid.get('mid-right')) and grid.get('mid-left') != None) or  #Checking mid row & non-empty
+            ((grid.get('bot-left') == grid.get('bot-center') == grid.get('bot-right')) and grid.get('bot-left') != None) or  #Checking bot row & non-empty
+            ((grid.get('top-left') == grid.get('mid-left') == grid.get('bot-left')) and grid.get('top-left') != None) or          #Checking left col & non-empty
+            ((grid.get('top-center') == grid.get('mid-center') == grid.get('bot-center')) and grid.get('top-center') != None) or  #Checking mid col & non-empty
+            ((grid.get('top-right') == grid.get('mid-right') == grid.get('bot-right')) and grid.get('top-right') != None) or      #Checking right col & non-empty
+            ((grid.get('top-left') == grid.get('mid-center') == grid.get('bot-right')) and grid.get('top-left') != None) or   #Checking diag left to right & non-empty
+            ((grid.get('top-right') == grid.get('mid-center') == grid.get('bot-left')) and grid.get('top-right') != None)     #Checking diag right to left & non-empty
             ):
             return False #Game is won/lost therefore over.
-
         else:
             if len(grid) < 9: #Checks if there are missing key pairs, this represents an unfinished game.
                 return True
@@ -153,13 +142,49 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
     else:
         boardDataStructure.setdefault(computerMove, 'X')
 
+#Main Program
+print("\n" + 'Hello, welcome to my tic-tac-toe game.')
+exit == True
+errorAttempts = 0
+
+#*Program in loop
+try:
+    print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
+    if input() == "y" or "yes": #* this input check is broken
+        print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''')
+        difficulty = input()
+        os.system('cls')
+        boardDataStructure = {} #Setting the game board to empty.
+        if firstMoveMiniGame() == True:
+            humanFirst = True
+            playerCharacter = 'X'
+            print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
+            printGameboard(boardDataStructure)
+            print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
+            boardDataStructure.setdefault(input(), 'X') #Player Move Input
+            printGameboard(boardDataStructure)
+        else:
+            humanFirst = False
+            playerCharacter = 'O'
+            print("\n" + 'You are O, and are playing at "' + difficulty +'" difficulty.' + "\n")
+        while gameContinuation(boardDataStructure) == True:     
+            easyAI(boardDataStructure, humanFirst) #AI Move Input
+            printGameboard(boardDataStructure) #Print gameboard
+            print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right).')
+            print('Recall your symbol is "' + playerCharacter +'".')
+            boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
+        #*Program winner declaration
+    else:
+        #*exit == True
+        sys.exit()
+except:
+    errorAttempts =+ 1
+    if errorAttempts >= 3:
+        print("\n" + 'Wrong data type entered, please read directions carefully. Restarting game.')
+    else:
+        print("\n" + 'Maxiumum number of error attempts reached.')
+        #*exit == True
+        sys.exit()
 
 
-os.system('cls')
-print('Player Move')
-printGameboard(boardDataStructure)
-bob = True
-easyAI(boardDataStructure, bob)
-print("\n"*3)
-print('Computer Move')
-printGameboard(boardDataStructure)
+print("\n"*5 + 'Thank you for playing, have a nice day!')
