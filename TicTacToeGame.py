@@ -11,7 +11,7 @@
 ##Print Gameboard Function || Input: Board Data Structure; Output: Pretty Board Data Structure (COMPLETED)
     #Note: Use pretty print library
 
-##Game Status Checker Function || Input: Board Data-Structure; Output: Finished game bool (COMPLETED)
+##Game Continuation Checker Function || Input: Board Data-Structure; Output: Finished game bool (COMPLETED)
     #Three In Row? 
         #If yes: count most common element and declare winner.
         #If no:
@@ -63,13 +63,14 @@ import os
 import random
 import pprint
 
-##ToDo: Finish gameStatusChecker function, verify print works with empty spaces.
+##ToDo: Verify print works with empty spaces.
 
 #Demo Data Structure (Draw)
-boardDataStructure = {'top-left': 'c', 'top-center': 'a', 'top-right': 'a', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
+#boardDataStructure = {'top-left': 'c', 'top-center': 'a', 'top-right': 'a', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
 
 #Demo Data Structure (Missing Key-Pairs)
-#boardDataStructure = {'top-right': 'a', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
+#boardDataStructure = {'top-right': 'X', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
+boardDataStructure = {'top-right': 'X', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
 
 
 def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to determine first move. Returns true or false value if the human won.
@@ -87,6 +88,8 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
             elif abs(randomNumber - int(number)) < abs(randomNumber - computerChoice):
                 os.system('cls')
                 print('Congrats, you won the guessing game!' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
+                global humanFirst #Global variable for use in AI difficulty function.
+                humanFirst = True
                 return True #Human won, returns true.
             else:
                 os.system('cls')
@@ -106,7 +109,7 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
             sys.exit()
 
 def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure and returns it in easy to read format.
-    os.system('cls')
+    #os.system('cls')
     print(boardDataStructure.get('top-left', ' ') + ' | ' + boardDataStructure.get('top-center', ' ') + ' | ' + boardDataStructure.get('top-right',' '))
     print('----------')
     print(boardDataStructure.get('mid-left', ' ') + ' | ' + boardDataStructure.get('mid-center', ' ') + ' | ' + boardDataStructure.get('mid-right',' '))
@@ -138,3 +141,25 @@ def gameContinuation(grid): #Inputs board data structure to check game status. O
         print('Critical error in game status checker, exiting program.')
         sys.exit()
 
+def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data structure and modifys global datastucture of current game. 
+    emptyBoard = {'top-left': '', 'top-center': '', 'top-right': '', 'mid-left': '', 'mid-center': '', 'mid-right': '', 'bot-left': '', 'bot-center': '', 'bot-right': ''}
+    emptyBoardKeysList = list(emptyBoard.keys())
+    boardDataStrucKeysList = list(boardDataStructure.keys())
+    unfilledSquaresList = list(set(emptyBoardKeysList)^set(boardDataStrucKeysList)) #Checking for key differences between two sets.
+    randomIndex = random.randint(0,int(len(unfilledSquaresList))-1) #Chooses random number (based off length of unfilledSquaresList) for use in indexing.
+    computerMove = unfilledSquaresList[randomIndex]
+    if humanFirst == True:
+        boardDataStructure.setdefault(computerMove, 'O')
+    else:
+        boardDataStructure.setdefault(computerMove, 'X')
+
+
+
+os.system('cls')
+print('Player Move')
+printGameboard(boardDataStructure)
+bob = True
+easyAI(boardDataStructure, bob)
+print("\n"*3)
+print('Computer Move')
+printGameboard(boardDataStructure)
