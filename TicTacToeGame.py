@@ -27,8 +27,8 @@
 #*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*##*#*( Main Program PsudeoCode )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 #set default errors attempts to 0
 #Welcome Screen, 
-#Loop 'Play tic tac toe? (y/n)'
    #try:
+        #Loop 'Play tic tac toe? (y/n)'
         #if yes:
             #Game Difficult Pick (Easy/Hard variable return)
             #First Move Mini Game (firstMove variable return)
@@ -60,7 +60,7 @@
 import sys
 import os
 import random
-import pprint
+import pprint #* needed?
 
 #Demo Data Structure (Missing Key-Pairs)
 #boardDataStructure = {'top-right': 'X', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
@@ -99,7 +99,7 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
             sys.exit()
 
 def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure and returns it in easy to read format.
-    #os.system('cls')
+    #*os.system('cls')
     print(boardDataStructure.get('top-left', ' ') + ' | ' + boardDataStructure.get('top-center', ' ') + ' | ' + boardDataStructure.get('top-right',' '))
     print('---------')
     print(boardDataStructure.get('mid-left', ' ') + ' | ' + boardDataStructure.get('mid-center', ' ') + ' | ' + boardDataStructure.get('mid-right',' '))
@@ -109,7 +109,7 @@ def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structu
 
 def gameContinuation(grid): #Inputs board data structure to check game status. Outputs true or false bool representing if the game should continue.
     try: 
-        if ( #This checks for all winning combinations.
+        if ( #This checks for all winning combinations in 3x3 game.
             ((grid.get('top-left') == grid.get('top-center') == grid.get('top-right')) and grid.get('top-left') != None) or  #Checking top row & non-empty 
             ((grid.get('mid-left') == grid.get('mid-center') == grid.get('mid-right')) and grid.get('mid-left') != None) or  #Checking mid row & non-empty
             ((grid.get('bot-left') == grid.get('bot-center') == grid.get('bot-right')) and grid.get('bot-left') != None) or  #Checking bot row & non-empty
@@ -147,7 +147,7 @@ print("\n" + 'Hello, welcome to my tic-tac-toe game.')
 exit == True
 errorAttempts = 0
 
-#*Program in loop
+#*Include Loop
 try:
     print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
     if input() == "y" or "yes": #* this input check is broken
@@ -155,14 +155,13 @@ try:
         difficulty = input()
         os.system('cls')
         boardDataStructure = {} #Setting the game board to empty.
-        if firstMoveMiniGame() == True:
+        if firstMoveMiniGame() == True: #Note, firstMoveMiniGame includes print() in its function.
             humanFirst = True
             playerCharacter = 'X'
             print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
             printGameboard(boardDataStructure)
             print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
             boardDataStructure.setdefault(input(), 'X') #Player Move Input
-            #*printGameboard(boardDataStructure)
         else:
             humanFirst = False
             playerCharacter = 'O'
@@ -176,9 +175,10 @@ try:
             print('Recall your symbol is "' + playerCharacter +'".')
             boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
             print()
-        #*Program winner declaration
-        #*Input checking for duplicate enteries
-
+        #*Winner Declaration
+                #histogram = list(boardDataStructure.values())
+                #winningCharacter = max(set(histogram))
+        #*Input error checking for duplicate enteries and bad values on main game
     else:
         #*exit == True
         sys.exit()
@@ -190,6 +190,4 @@ except:
         print("\n" + 'Maxiumum number of error attempts reached.')
         #*exit == True
         sys.exit()
-
-
 print("\n"*5 + 'Thank you for playing, have a nice day!')
