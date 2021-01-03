@@ -11,7 +11,7 @@
 ##Print Gameboard Function || Input: Board Data Structure; Output: Pretty Board Data Structure (COMPLETED)
     #Note: Use pretty print library
 
-##Game Status Checker Function || Input: Board Data-Structure; Output: Winner, Draw, Unfinished
+##Game Status Checker Function || Input: Board Data-Structure; Output: Finished game bool (COMPLETED)
     #Three In Row? 
         #If yes: count most common element and declare winner.
         #If no:
@@ -45,6 +45,9 @@
                 #Print Gameboard Function
                 #User input
                 #Print Gameboard Function    
+            #Winner Declaration
+                #histogram = list(boardDataStructure.values())
+                #winningCharacter = max(set(histogram))
         #if no:
             #exit program
     #except:
@@ -63,7 +66,11 @@ import pprint
 ##ToDo: Finish gameStatusChecker function, verify print works with empty spaces.
 
 #Demo Data Structure (Draw)
-boardDataStructure = {'top-left': 'a', 'top-center': 'a', 'top-right': 'a', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
+boardDataStructure = {'top-left': 'c', 'top-center': 'a', 'top-right': 'a', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
+
+#Demo Data Structure (Missing Key-Pairs)
+#boardDataStructure = {'top-right': 'a', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
+
 
 def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to determine first move. Returns true or false value if the human won.
     randomNumber = random.randint(0,10)
@@ -107,7 +114,7 @@ def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structu
     print(boardDataStructure.get('bot-left', ' ') + ' | ' + boardDataStructure.get('bot-center', ' ') + ' | ' + boardDataStructure.get('bot-right',' '))
     return
 
-def gameStatusChecker(grid): #Inputs board data structure to check game status. Outputs if game is over, drawn, or unfinished. 
+def gameContinuation(grid): #Inputs board data structure to check game status. Outputs true or false bool representing if the game should continue.
     try: 
         if ( #This checks for all winning combinations.
             ((grid.get('top-left') == grid.get('top-center') == grid.get('top-right')) and grid.get('top-left') != '') or  #Checking top row & non-empty 
@@ -119,17 +126,15 @@ def gameStatusChecker(grid): #Inputs board data structure to check game status. 
             ((grid.get('top-left') == grid.get('mid-center') == grid.get('bot-right')) and grid.get('top-left') != '') or   #Checking diag left to right & non-empty
             ((grid.get('top-right') == grid.get('mid-center') == grid.get('bot-left')) and grid.get('top-right') != '')     #Checking diag right to left & non-empty
             ):
-            print('Winner') #count most common element and return winner.*******
-        else:
-            #if empty spaces********
-                #return game unfinished******
-            #else******
-                #return game drawn*******
-            print('Draw or unfinished.')
-    except:
-            os.system('cls')
-            print('Critical error in game status checker, exiting program.')
-            sys.exit()
+            return False #Game is won/lost therefore over.
 
-printGameboard(boardDataStructure)
-gameStatusChecker(boardDataStructure)
+        else:
+            if len(grid) < 9: #Checks if there are missing key pairs, this represents an unfinished game.
+                return True
+            else:
+                return False #Game is drawn therefore over.
+    except:
+        os.system('cls')
+        print('Critical error in game status checker, exiting program.')
+        sys.exit()
+
