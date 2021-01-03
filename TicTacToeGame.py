@@ -162,7 +162,7 @@ try:
             printGameboard(boardDataStructure)
             print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
             boardDataStructure.setdefault(input(), 'X') #Player Move Input
-            printGameboard(boardDataStructure)
+            #*printGameboard(boardDataStructure)
         else:
             humanFirst = False
             playerCharacter = 'O'
@@ -170,10 +170,15 @@ try:
         while gameContinuation(boardDataStructure) == True:     
             easyAI(boardDataStructure, humanFirst) #AI Move Input
             printGameboard(boardDataStructure) #Print gameboard
+            if gameContinuation(boardDataStructure) == False:
+                break
             print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right).')
             print('Recall your symbol is "' + playerCharacter +'".')
             boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
+            print()
         #*Program winner declaration
+        #*Input checking for duplicate enteries
+
     else:
         #*exit == True
         sys.exit()
