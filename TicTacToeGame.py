@@ -1,6 +1,7 @@
 #Goal: Create a tic-tac-toe game using functions, data-structures, dictionaries, and lists.
 #Helpful Libraries: pprint, random, sys, pprint, copy
 #Game Rule Note: First player to go is "X" and second player to move is "O"
+#Documentation Note: Comments denoted #* require further review.
 
                                                 ####PsudeoCode####
 #*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*#*#*( Functions PsudeoCode )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
@@ -18,16 +19,17 @@
                     #If No: Draw. Note, it may be possible to draw in 3x3 or nxn board before all the spaces are filled in - needs further review, but functional as is for 3x3 case.
                     #If Yes: Return Unfinished
 
+    ##Error Checking & Duplicate Entry Checking Function (Pending)
+    
     ##Easy AI Function || Input:(X/O & Board Data-Structure); Output: Easy AI Board Data-Structure Revision (COMPLETED for nxn board)
         #Note, the AI for this randomly fills in entries by randomly indexing set differences.
-
-    ##Error Checking & Duplicate Entry Checking Function (Pending)
 
     #Hard AI Function || Input:(X/O & Board Data-Structure); Output: Hard AI Board Data-Structure Revision (Pending)
         #See 'win tictactoe every time algo' for 3x3 Grid, I believe there is a hardcode for this -- needs further review.
 
 #*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*##*#*( Main Program PsudeoCode )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
-    #Main Program (Pending)
+    #Note, this logic works for nxn board; however, the user would need to be prompted for more info (e.g. how big of a grid they want, how many matching characters in row to win)
+    #Main Program (Pending) 
         #set default errors attempts to 0
         #try:
             #Loop 'Play tic tac toe? (y/n)'
@@ -59,14 +61,10 @@
             #else
                 #Exit program. 
 
-
 import sys
 import os
 import random
 import pprint #* needed?
-
-#Demo Data Structure (Missing Key-Pairs)
-#boardDataStructure = {'top-right': 'X', 'mid-left': 'O', 'mid-center': 'O', 'mid-right': 'X', 'bot-left': 'O', 'bot-center': 'X', 'bot-right': 'O'}
 
 def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to determine first move. Returns true or false value if the human won.
     randomNumber = random.randint(0,10)
@@ -101,7 +99,7 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
             print('Critical error in first move mini game, exiting program.')
             sys.exit()
 
-def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure and returns it in easy to read format.
+def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure, and returns it in easy to read format.
     #*os.system('cls')
     print(boardDataStructure.get('top-left', ' ') + ' | ' + boardDataStructure.get('top-center', ' ') + ' | ' + boardDataStructure.get('top-right',' '))
     print('---------')
@@ -133,15 +131,16 @@ def gameContinuation(grid): #Inputs board data structure to check game status. O
         print('Critical error in game status checker, exiting program.')
         sys.exit()
 
-def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data structure and modifys global datastucture of current game. 
+def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data structure and modifys datastucture of current game. 
     emptyBoard = {'top-left': '', 'top-center': '', 'top-right': '', 'mid-left': '', 'mid-center': '', 'mid-right': '', 'bot-left': '', 'bot-center': '', 'bot-right': ''}
+        #For nxn solution, be sure to procur a datastucture with the properly notated key's.
     emptyBoardKeysList = list(emptyBoard.keys())
     boardDataStrucKeysList = list(boardDataStructure.keys())
     unfilledSquaresList = list(set(emptyBoardKeysList)^set(boardDataStrucKeysList)) #Checking for key differences between two sets.
     randomIndex = random.randint(0,int(len(unfilledSquaresList))-1) #Chooses random number (based off length of unfilledSquaresList) for use in indexing.
     computerMove = unfilledSquaresList[randomIndex]
     if humanFirst == True:
-        boardDataStructure.setdefault(computerMove, 'O')
+        boardDataStructure.setdefault(computerMove, 'O') #Note, writes O because the computer moves second if humanFirst is true.
     else:
         boardDataStructure.setdefault(computerMove, 'X')
 
@@ -149,7 +148,6 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
 print("\n" + 'Hello, welcome to my tic-tac-toe game.')
 exit == True
 errorAttempts = 0
-
 #*Include Loop
 try:
     print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
@@ -157,8 +155,8 @@ try:
         print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''')
         difficulty = input()
         os.system('cls')
-        boardDataStructure = {} #Setting the game board to empty.
-        if firstMoveMiniGame() == True: #Note, firstMoveMiniGame includes print() in its function.
+        boardDataStructure = {} #Setting the game board to empty, important for repeated game functionality.
+        if firstMoveMiniGame() == True: #Note, firstMoveMiniGame() includes print() in its function.
             humanFirst = True
             playerCharacter = 'X'
             print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
