@@ -1,61 +1,64 @@
 #Goal: Create a tic-tac-toe game using functions, data-structures, dictionaries, and lists.
 #Helpful Libraries: pprint, random, sys, pprint, copy
-#Note: First player to go is X and second player is O
+#Game Rule Note: First player to go is "X" and second player to move is "O"
 
                                                 ####PsudeoCode####
-
 #*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*#*#*( Functions PsudeoCode )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
-##First Move Mini Game Function || Input: Rand Number; Output: Human first bool (COMPLETED)
-    #Coinflip? Rand. Number Guessing game?
+    ##First Move Mini Game Function || Input: Rand Number; Output: Human first bool (COMPLETED for nxn board)
+        #Coinflip? Rand. Number Guessing game?
 
-##Print Gameboard Function || Input: Board Data Structure; Output: Pretty Board Data Structure (COMPLETED)
-    #Note: Use pretty print library
+    ##Print Gameboard Function || Input: Board Data Structure; Output: Pretty Board Data Structure (COMPLETED for 3x3 board)
+        #Note: Use pretty print library
 
-##Game Continuation Checker Function || Input: Board Data-Structure; Output: Finished game bool (COMPLETED)
-    #Three In Row? 
-        #If yes: count most common element and declare winner.
-        #If no:
-            #Empty Spaces remaining? 
-                #If No: Draw
-                #If Yes: Return Unfinished
+    ##Game Continuation Checker Function || Input: Board Data-Structure; Output: Finished Game Boolean (COMPLETED for 3x3 board)
+        #Three In Row? Note, this logic can be applied to nxn board with a modification in the yes pathway's conditional statement.
+            #If yes: count most common element and declare winner.
+            #If no:
+                #Empty Spaces remaining? 
+                    #If No: Draw. Note, it may be possible to draw in 3x3 or nxn board before all the spaces are filled in - needs further review, but functional as is for 3x3 case.
+                    #If Yes: Return Unfinished
 
-##Easy AI Function || Input:(X/O & Board Data-Structure); Output: Easy AI Board Data-Structure Revision (COMPLETED)
+    ##Easy AI Function || Input:(X/O & Board Data-Structure); Output: Easy AI Board Data-Structure Revision (COMPLETED for nxn board)
+        #Note, the AI for this randomly fills in entries by randomly indexing set differences.
 
-##Hard AI Function || Input:(X/O & Board Data-Structure); Output: Hard AI Board Data-Structure Revision
-    #See 'win tictactoe every time algo'
+    ##Error Checking & Duplicate Entry Checking Function (Pending)
+
+    #Hard AI Function || Input:(X/O & Board Data-Structure); Output: Hard AI Board Data-Structure Revision (Pending)
+        #See 'win tictactoe every time algo' for 3x3 Grid, I believe there is a hardcode for this -- needs further review.
 
 #*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*##*#*( Main Program PsudeoCode )*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
-#set default errors attempts to 0
-#Welcome Screen, 
-   #try:
-        #Loop 'Play tic tac toe? (y/n)'
-        #if yes:
-            #Game Difficult Pick (Easy/Hard variable return)
-            #First Move Mini Game (firstMove variable return)
-                #if human first: 
-                    #Declare human X
-                    #Print Gameboard Function (Empty)
-                    #User gameboard input
+    #Main Program (Pending)
+        #set default errors attempts to 0
+        #try:
+            #Loop 'Play tic tac toe? (y/n)'
+            #if yes:
+                #Game Difficult Pick (Easy/Hard variable return)
+                #First Move Mini Game (firstMove variable return)
+                    #if human first. from mini game above: 
+                        #Declare Human X
+                        #Print Gameboard Function (Empty)
+                        #User gameboard input
+                    #else: 
+                        #Declare Computer X
+                #Loop (depends on Game Status Checker Function)
+                    #Computer AI Function (Use Easy/Hard argument)
                     #Print Gameboard Function
-                #else: 
-                    #Declare computer X
-            #Loop (depends on Game Status Checker Function)
-                #Computer AI Function (Use Easy/Hard argument)
-                #Print Gameboard Function
-                #User input
-                #Print Gameboard Function    
-            #Winner Declaration
-                #histogram = list(boardDataStructure.values())
-                #winningCharacter = max(set(histogram))
-        #if no:
-            #exit program
-    #except:
-        #error attempts + 1
-        #if error attempts less than or equal max attempts
-            #print('Wrong data type entered, please read directions carefully. Restarting game.')
-        #else
-            #Exit program. 
-#*#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+                    #if AI won game here
+                        #break from loop
+                    #User input
+                    #Print Gameboard Function    
+                #Winner Declaration, check who has the most enteries total b/c winner is last person to move; therefore, most enteries in turn-by-turn game.
+                    #histogram = list(boardDataStructure.values())
+                    #winningCharacter = max(set(histogram))
+            #if no:
+                #exit program
+        #except:
+            #error attempts + 1
+            #if error attempts less than or equal max attempts
+                #print('Wrong data type entered, please read directions carefully. Restarting game.')
+            #else
+                #Exit program. 
+
 
 import sys
 import os
