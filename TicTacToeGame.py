@@ -22,7 +22,7 @@
     ##Error Checking & Duplicate Entry Checking Function (Pending)
     
     ##Easy AI Function || Input:(X/O & Board Data-Structure); Output: Easy AI Board Data-Structure Revision (COMPLETED for nxn board)
-        #Note, the AI for this randomly fills in entries by randomly indexing set differences.
+        #Note, the easy AI fills in entries by randomly indexing set differences.
 
     #Hard AI Function || Input:(X/O & Board Data-Structure); Output: Hard AI Board Data-Structure Revision (Pending)
         #See 'win tictactoe every time algo' for 3x3 Grid, I believe there is a hardcode for this -- needs further review.
