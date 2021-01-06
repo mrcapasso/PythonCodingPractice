@@ -76,7 +76,7 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
             if abs(randomNumber - int(number)) == abs(randomNumber - computerChoice):
                 os.system('cls')
                 print('You tied!' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
-                print("\n"+ "Please try again!") #Human tied, loop.
+                print("\n"+ "Time for a rematch!") #Human tied, loop.
                 i += 1
             elif abs(randomNumber - int(number)) < abs(randomNumber - computerChoice):
                 os.system('cls')
@@ -176,10 +176,18 @@ while exitGame == False:
                 print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right).')
                 print('Recall your symbol is "' + playerCharacter +'".')
                 boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
-            #*Winner Declaration
-                    #histogram = list(boardDataStructure.values())
-                    #winningCharacter = max(set(histogram))
-            #*Input error checking for duplicate enteries and bad values on main game
+                #*Input error checking for duplicate enteries and bad values on main game
+            #Winner Announcment Segment
+                #* Create announcment for draw, may require changing gameContination from bool return to int 0-3 return
+                #* or consider adding a break to the function definition with some print
+            os.system('cls')
+            printGameboard(boardDataStructure)
+            histogram = list(boardDataStructure.values())
+            winningCharacter = max(set(histogram))
+            if playerCharacter == winningCharacter:
+                print('Congratulations, you won as ' + playerCharacter+'!' + "\n")
+            else:
+                print('Sorry, you lost as ' + playerCharacter+'.' + "\n")
             os.system('pause')
         else:
             exitGame == True        
@@ -191,3 +199,5 @@ while exitGame == False:
             print("\n" + 'Maxiumum number of error attempts reached.')
             exitGame == True
 print("\n"*5 + 'Thank you for playing, have a nice day!')
+os.system('pause')
+sys.exit()
