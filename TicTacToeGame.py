@@ -97,6 +97,7 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
         except:
             os.system('cls')
             print('Critical error in first move mini game, exiting program.')
+            os.system('pause')
             sys.exit()
 
 def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure, and returns it in easy to read format.
@@ -129,6 +130,7 @@ def gameContinuation(grid): #Inputs board data structure to check game status. O
     except:
         os.system('cls')
         print('Critical error in game status checker, exiting program.')
+        os.system('pause')
         sys.exit()
 
 def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data structure and modifys datastucture of current game. 
