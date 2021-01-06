@@ -146,49 +146,48 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
 
 #Main Program
 print("\n" + 'Hello, welcome to my tic-tac-toe game.')
-exit == True
+exitGame = False
 errorAttempts = 0
-#*Include Loop
-try:
-    print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
-    if input() == "y" or "yes": #* this input check is broken
-        print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''')
-        difficulty = input()
-        os.system('cls')
-        boardDataStructure = {} #Setting the game board to empty, important for repeated game functionality.
-        if firstMoveMiniGame() == True: #Note, firstMoveMiniGame() includes print() in its function.
-            humanFirst = True
-            playerCharacter = 'X'
-            print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
-            printGameboard(boardDataStructure)
-            print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
-            boardDataStructure.setdefault(input(), 'X') #Player Move Input
+while exitGame == False:
+    try:
+        print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
+        playGameQ = input()
+        if playGameQ == ('y' or 'yes'): #*validation check not working
+            print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''')
+            difficulty = input()
+            os.system('cls')
+            boardDataStructure = {} #Setting the game board to empty, important for repeated game functionality.
+            if firstMoveMiniGame() == True: #Note, firstMoveMiniGame() includes print() in its function.
+                humanFirst = True
+                playerCharacter = 'X'
+                print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
+                printGameboard(boardDataStructure)
+                print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
+                boardDataStructure.setdefault(input(), 'X') #Player Move Input
+            else:
+                humanFirst = False
+                playerCharacter = 'O'
+                print("\n" + 'You are O, and are playing at "' + difficulty +'" difficulty.' + "\n")
+            while gameContinuation(boardDataStructure) == True:     
+                easyAI(boardDataStructure, humanFirst) #AI Move Input
+                printGameboard(boardDataStructure) #Print gameboard
+                if gameContinuation(boardDataStructure) == False:
+                    break
+                print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right).')
+                print('Recall your symbol is "' + playerCharacter +'".')
+                boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
+            #*Winner Declaration
+                    #histogram = list(boardDataStructure.values())
+                    #winningCharacter = max(set(histogram))
+            #*Input error checking for duplicate enteries and bad values on main game
+            os.system('pause')
         else:
-            humanFirst = False
-            playerCharacter = 'O'
-            print("\n" + 'You are O, and are playing at "' + difficulty +'" difficulty.' + "\n")
-        while gameContinuation(boardDataStructure) == True:     
-            easyAI(boardDataStructure, humanFirst) #AI Move Input
-            printGameboard(boardDataStructure) #Print gameboard
-            if gameContinuation(boardDataStructure) == False:
-                break
-            print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right).')
-            print('Recall your symbol is "' + playerCharacter +'".')
-            boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
-            print()
-        #*Winner Declaration
-                #histogram = list(boardDataStructure.values())
-                #winningCharacter = max(set(histogram))
-        #*Input error checking for duplicate enteries and bad values on main game
-    else:
-        #*exit == True
-        sys.exit()
-except:
-    errorAttempts =+ 1
-    if errorAttempts >= 3:
-        print("\n" + 'Wrong data type entered, please read directions carefully. Restarting game.')
-    else:
-        print("\n" + 'Maxiumum number of error attempts reached.')
-        #*exit == True
-        sys.exit()
+            exitGame == True        
+    except:
+        errorAttempts =+ 1
+        if errorAttempts <= 3:
+            print("\n" + 'Wrong data type entered, please read directions carefully. Restarting game.')
+        else:
+            print("\n" + 'Maxiumum number of error attempts reached.')
+            exitGame == True
 print("\n"*5 + 'Thank you for playing, have a nice day!')
