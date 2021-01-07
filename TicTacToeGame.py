@@ -187,7 +187,7 @@ while exitGame == False:
             if gameContinuation(boardDataStructure) == 'champion' and winningCharacter == playerCharacter:
                 print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
             elif gameContinuation(boardDataStructure) == 'champion' and winningCharacter != playerCharacter:
-                print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
+                print('Sorry, you lost as ' + playerCharacter +'!' + "\n")
             elif gameContinuation(boardDataStructure) == 'draw':
                 print('You tied. Nice try!' + "\n")
             else:
