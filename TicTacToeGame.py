@@ -101,7 +101,6 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
             sys.exit()
 
 def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structure, and returns it in easy to read format.
-    #*os.system('cls')
     print(boardDataStructure.get('top-left', ' ') + ' | ' + boardDataStructure.get('top-center', ' ') + ' | ' + boardDataStructure.get('top-right',' '))
     print('---------')
     print(boardDataStructure.get('mid-left', ' ') + ' | ' + boardDataStructure.get('mid-center', ' ') + ' | ' + boardDataStructure.get('mid-right',' '))
@@ -109,7 +108,7 @@ def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structu
     print(boardDataStructure.get('bot-left', ' ') + ' | ' + boardDataStructure.get('bot-center', ' ') + ' | ' + boardDataStructure.get('bot-right',' '))
     return
 
-def gameContinuation(grid): #Inputs board data structure to check game status. Outputs true or false bool representing if the game should continue.
+def gameContinuation(grid): #Inputs board data structure to check game status. Game status as string: champion (this denotes a winner exists, but not who), unfinished, or draw.
     try: 
         if ( #This checks for all winning combinations in 3x3 game.
             ((grid.get('top-left') == grid.get('top-center') == grid.get('top-right')) and grid.get('top-left') != None) or  #Checking top row & non-empty 
@@ -121,12 +120,12 @@ def gameContinuation(grid): #Inputs board data structure to check game status. O
             ((grid.get('top-left') == grid.get('mid-center') == grid.get('bot-right')) and grid.get('top-left') != None) or   #Checking diag left to right & non-empty
             ((grid.get('top-right') == grid.get('mid-center') == grid.get('bot-left')) and grid.get('top-right') != None)     #Checking diag right to left & non-empty
             ):
-            return False #Game is won/lost therefore over.
+            return 'champion' #Game is won/lost therefore over.
         else:
             if len(grid) < 9: #Checks if there are missing key pairs, this represents an unfinished game.
-                return True
+                return 'unfinished'
             else:
-                return False #Game is drawn therefore over.
+                return 'draw' #Game is drawn therefore over.
     except:
         os.system('cls')
         print('Critical error in game status checker, exiting program.')
@@ -155,8 +154,8 @@ while exitGame == False:
         print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
         playGameQ = input()
         if (playGameQ.lower() == 'y') or (playGameQ.lower() =='yes'):
-            #* print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''') #enable if hardAI
-            #* difficulty = input() #enable if hardAI
+            #print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''') #enable if hardAI
+            #difficulty = input() #enable if hardAI
             difficulty = 'easy' #disable if hardAI
             os.system('cls')
             boardDataStructure = {} #Setting the game board to empty, important for repeated game functionality.
@@ -171,18 +170,16 @@ while exitGame == False:
                 humanFirst = False
                 playerCharacter = 'O'
                 print("\n" + 'You are O, and are playing at "' + difficulty +'" difficulty.' + "\n")
-            while gameContinuation(boardDataStructure) == True:     
+            while gameContinuation(boardDataStructure) == 'unfinished':
                 easyAI(boardDataStructure, humanFirst) #AI Move Input
                 printGameboard(boardDataStructure) #Print gameboard
-                if gameContinuation(boardDataStructure) == False:
+                if gameContinuation(boardDataStructure) != 'unfinished':
                     break
                 print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right).')
                 print('Recall your symbol is "' + playerCharacter +'".')
                 boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
                 #*Input error checking for duplicate enteries and bad values on main game
             #Winner Announcment Segment
-                #* Create announcment for draw, may require changing gameContination from bool return to int 0-3 return
-                #* or consider adding a break to the function definition with some print
             os.system('cls')
             printGameboard(boardDataStructure)
             histogram = list(boardDataStructure.values())
