@@ -155,8 +155,9 @@ while exitGame == False:
         print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
         playGameQ = input()
         if (playGameQ.lower() == 'y') or (playGameQ.lower() =='yes'):
-            print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''')
-            difficulty = input()
+            #* print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''') #enable if hardAI
+            #* difficulty = input() #enable if hardAI
+            difficulty = 'easy' #disable if hardAI
             os.system('cls')
             boardDataStructure = {} #Setting the game board to empty, important for repeated game functionality.
             if firstMoveMiniGame() == True: #Note, firstMoveMiniGame() includes print() in its function.
@@ -187,10 +188,12 @@ while exitGame == False:
             histogram = list(boardDataStructure.values())
             winningCharacter = max(set(histogram))
             if playerCharacter == winningCharacter:
-                print('Congratulations, you won as ' + playerCharacter+'!' + "\n")
+                #* verify winner actually gets win message (same for loser)
+                print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
             else:
-                print('Sorry, you lost as ' + playerCharacter+'.' + "\n")
+                print('Sorry, you lost as ' + playerCharacter +'.' + "\n")
             os.system('pause')
+            os.system('cls')
         else:
             exitGame = True        
     except:
