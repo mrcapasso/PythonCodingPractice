@@ -154,7 +154,7 @@ while exitGame == False:
     try:
         print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
         playGameQ = input()
-        if (playGameQ.lower() == 'y') or (playGameQ.lower() =='yes'): #*validation check not working
+        if (playGameQ.lower() == 'y') or (playGameQ.lower() =='yes'):
             print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''')
             difficulty = input()
             os.system('cls')
