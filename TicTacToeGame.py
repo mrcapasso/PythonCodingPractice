@@ -154,7 +154,7 @@ while exitGame == False:
     try:
         print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
         playGameQ = input()
-        if playGameQ == ('y' or 'yes'): #*validation check not working
+        if (playGameQ.lower() == 'y') or (playGameQ.lower() =='yes'): #*validation check not working
             print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''')
             difficulty = input()
             os.system('cls')
@@ -192,14 +192,14 @@ while exitGame == False:
                 print('Sorry, you lost as ' + playerCharacter+'.' + "\n")
             os.system('pause')
         else:
-            exitGame == True        
+            exitGame = True        
     except:
         errorAttempts =+ 1
         if errorAttempts <= 3:
             print("\n" + 'Wrong data type entered, please read directions carefully. Restarting game.')
         else:
             print("\n" + 'Maxiumum number of error attempts reached.')
-            exitGame == True
+            exitGame = True
 print("\n"*5 + 'Thank you for playing, have a nice day!')
 os.system('pause')
 sys.exit()
