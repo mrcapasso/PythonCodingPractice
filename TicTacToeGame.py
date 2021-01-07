@@ -184,11 +184,14 @@ while exitGame == False:
             printGameboard(boardDataStructure)
             histogram = list(boardDataStructure.values())
             winningCharacter = max(set(histogram))
-            if playerCharacter == winningCharacter:
-                #* verify winner actually gets win message (same for loser)
+            if gameContinuation(boardDataStructure) == 'champion' and winningCharacter == playerCharacter:
                 print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
+            elif gameContinuation(boardDataStructure) == 'champion' and winningCharacter != playerCharacter:
+                print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
+            elif gameContinuation(boardDataStructure) == 'draw':
+                print('You tied. Nice try!' + "\n")
             else:
-                print('Sorry, you lost as ' + playerCharacter +'.' + "\n")
+                print('Critical error in winner announcment.')
             os.system('pause')
             os.system('cls')
         else:
