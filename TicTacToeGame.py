@@ -145,7 +145,9 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
         boardDataStructure.setdefault(computerMove, 'X')
 
 #Main Program
-#* check tied mini game condition for bugs and clearscreen, may need to refresh variables b/c you can max out error attempts if spamming same previously tied num
+#*Check tied mini game for bugs and clearscreen, may need to refresh variables b/c you can max out error attempts if spamming same previously tied num
+#*Input error checking for duplicate enteries and bad values on main game.
+#*Bugs: occurs when human first, but loses game. human second, but wins game. Try adding humanFirst to announcment condition
 exitGame = False
 errorAttempts = 0
 while exitGame == False:
@@ -177,14 +179,12 @@ while exitGame == False:
                 print("\n" + 'You are playing as "' + playerCharacter +'".')
                 print("\n" + 'Please input an option from the following:' + "\n" +'(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
                 boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
-                #*Input error checking for duplicate enteries and bad values on main game
                 os.system('cls')
             #Winner Announcment Segment
             os.system('cls')
             printGameboard(boardDataStructure)
             histogram = list(boardDataStructure.values())
             winningCharacter = max(set(histogram))
-                #*Bugs: occurs when human first, but loses game. human second, but wins game. Try adding humanFirst to condition
             if gameContinuation(boardDataStructure) == 'champion' and winningCharacter == playerCharacter:
                 print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
             elif gameContinuation(boardDataStructure) == 'champion' and winningCharacter != playerCharacter:
