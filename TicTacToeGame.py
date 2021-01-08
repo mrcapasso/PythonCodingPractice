@@ -1,5 +1,4 @@
-#Goal: Create a tic-tac-toe game using functions, data-structures, dictionaries, and lists.
-#Helpful Libraries: pprint, random, sys, pprint, copy
+#Goal: Create a tic-tac-toe game using functions, data-structures, dictionaries, and lists. Purpose is to develop familiarity with data structures, lists, and indexes.
 #Game Rule Note: First player to go is "X" and second player to move is "O"
 #Documentation Note: Comments denoted #* require further review.
 
@@ -64,19 +63,19 @@
 import sys
 import os
 import random
-import pprint #* needed?
 
 def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to determine first move. Returns true or false value if the human won.
     randomNumber = random.randint(0,10)
     computerChoice = random.randint(0,10)
     for i in range(0,3): #Loop for three attempts, used to error check non-valid game inputs.
         try:
-            print('Please pick a number between 0 and 10.')
-            number = str(input())
+            number = str(input('Please pick a number between 0 and 10: '))
             if abs(randomNumber - int(number)) == abs(randomNumber - computerChoice):
                 os.system('cls')
                 print('You tied!' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
                 print("\n"+ "Time for a rematch!") #Human tied, loop.
+                os.system('pause')
+                os.system('cls')
                 i += 1
             elif abs(randomNumber - int(number)) < abs(randomNumber - computerChoice):
                 os.system('cls')
@@ -134,10 +133,10 @@ def gameContinuation(grid): #Inputs board data structure to check game status. G
 
 def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data structure and modifys datastucture of current game. 
     emptyBoard = {'top-left': '', 'top-center': '', 'top-right': '', 'mid-left': '', 'mid-center': '', 'mid-right': '', 'bot-left': '', 'bot-center': '', 'bot-right': ''}
-        #For nxn solution, be sure to procur a datastucture with the properly notated key's.
+        #For nxn solution, be sure to procur a datastucture with the properly notated key's as in emptyBoard above.
     emptyBoardKeysList = list(emptyBoard.keys())
     boardDataStrucKeysList = list(boardDataStructure.keys())
-    unfilledSquaresList = list(set(emptyBoardKeysList)^set(boardDataStrucKeysList)) #Checking for key differences between two sets.
+    unfilledSquaresList = list(set(emptyBoardKeysList)^set(boardDataStrucKeysList)) #Checking for key (as in key-pair) differences between two sets.
     randomIndex = random.randint(0,int(len(unfilledSquaresList))-1) #Chooses random number (based off length of unfilledSquaresList) for use in indexing.
     computerMove = unfilledSquaresList[randomIndex]
     if humanFirst == True:
@@ -146,16 +145,13 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
         boardDataStructure.setdefault(computerMove, 'X')
 
 #Main Program
-#* Input clear screens
-#* consolidate text input on same line
-print("\n" + 'Hello, welcome to my tic-tac-toe game.')
+#* check tied mini game condition for bugs and clearscreen, may need to refresh variables b/c you can max out error attempts if spamming same previously tied num
 exitGame = False
 errorAttempts = 0
 while exitGame == False:
     try:
-        print("Would you like to play a round of tic-tac-toe? (Enter yes or no)")
-        playGameQ = input()
-        if (playGameQ.lower() == 'y') or (playGameQ.lower() =='yes'):
+        playGameQ = input('Would you like to play tic-tac-toe? (yes/no): ')
+        if (playGameQ.lower() == 'y') or (playGameQ.lower() =='ye') or (playGameQ.lower() =='yes'):
             #print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''') #enable if hardAI
             #difficulty = input() #enable if hardAI
             difficulty = 'easy' #remove if hardAI
@@ -168,7 +164,7 @@ while exitGame == False:
                 printGameboard(boardDataStructure) #Print gameboard
                 print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
                 boardDataStructure.setdefault(input(), 'X') #Player Move Input
-                os.system('cls') #* verify good
+                os.system('cls')
             else:
                 humanFirst = False
                 playerCharacter = 'O'
@@ -178,16 +174,17 @@ while exitGame == False:
                 printGameboard(boardDataStructure) #Print gameboard
                 if gameContinuation(boardDataStructure) != 'unfinished':
                     break
-                print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right).')
-                print('Recall your symbol is "' + playerCharacter +'".')
+                print("\n" + 'You are playing as "' + playerCharacter +'".')
+                print("\n" + 'Please input an option from the following:' + "\n" +'(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
                 boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
                 #*Input error checking for duplicate enteries and bad values on main game
+                os.system('cls')
             #Winner Announcment Segment
             os.system('cls')
             printGameboard(boardDataStructure)
             histogram = list(boardDataStructure.values())
             winningCharacter = max(set(histogram))
-            #*Bugs: occurs when human first, but loses game. human second, but wins game.
+                #*Bugs: occurs when human first, but loses game. human second, but wins game. Try adding humanFirst to condition
             if gameContinuation(boardDataStructure) == 'champion' and winningCharacter == playerCharacter:
                 print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
             elif gameContinuation(boardDataStructure) == 'champion' and winningCharacter != playerCharacter:
