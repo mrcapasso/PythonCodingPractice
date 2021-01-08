@@ -84,16 +84,16 @@ def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to d
                 return True #Human won, returns true.
             else:
                 os.system('cls')
-                print('You lost the guessing game.' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
+                print('You lost the guessing mini-game.' + "\n" + 'The number was: ' + str(randomNumber) + '. You guessed ' + str(number) + ' and the computer guessed ' + str(computerChoice) +'.')
                 return False #Human lost, returns false.
         except ValueError: #Error checking for non-integer value.
             i += 1
             if i >= 3:
                 os.system('cls')
-                print('Max attempts reached, exiting program.')
+                print('Max attempts reached reached for mini-game.')
                 sys.exit()
             os.system('cls')
-            print("\n" + '*Incorrect input type. Please try again.*' + "\n")
+            print("\n" + '*Incorrect input type. Try again.*' + "\n")
         except:
             os.system('cls')
             print('Critical error in first move mini game, exiting program.')
@@ -146,6 +146,8 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
         boardDataStructure.setdefault(computerMove, 'X')
 
 #Main Program
+#* Input clear screens
+#* consolidate text input on same line
 print("\n" + 'Hello, welcome to my tic-tac-toe game.')
 exitGame = False
 errorAttempts = 0
@@ -156,16 +158,17 @@ while exitGame == False:
         if (playGameQ.lower() == 'y') or (playGameQ.lower() =='yes'):
             #print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''') #enable if hardAI
             #difficulty = input() #enable if hardAI
-            difficulty = 'easy' #disable if hardAI
+            difficulty = 'easy' #remove if hardAI
             os.system('cls')
             boardDataStructure = {} #Setting the game board to empty, important for repeated game functionality.
             if firstMoveMiniGame() == True: #Note, firstMoveMiniGame() includes print() in its function.
                 humanFirst = True
                 playerCharacter = 'X'
                 print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
-                printGameboard(boardDataStructure)
+                printGameboard(boardDataStructure) #Print gameboard
                 print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
                 boardDataStructure.setdefault(input(), 'X') #Player Move Input
+                os.system('cls') #* verify good
             else:
                 humanFirst = False
                 playerCharacter = 'O'
@@ -184,6 +187,7 @@ while exitGame == False:
             printGameboard(boardDataStructure)
             histogram = list(boardDataStructure.values())
             winningCharacter = max(set(histogram))
+            #*Bugs: occurs when human first, but loses game. human second, but wins game.
             if gameContinuation(boardDataStructure) == 'champion' and winningCharacter == playerCharacter:
                 print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
             elif gameContinuation(boardDataStructure) == 'champion' and winningCharacter != playerCharacter:
@@ -199,7 +203,7 @@ while exitGame == False:
     except:
         errorAttempts =+ 1
         if errorAttempts <= 3:
-            print("\n" + 'Wrong data type entered, please read directions carefully. Restarting game.')
+            print("\n" + 'Please read directions carefully. Restarting game.')
         else:
             print("\n" + 'Maxiumum number of error attempts reached.')
             exitGame = True
