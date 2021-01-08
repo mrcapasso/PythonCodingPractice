@@ -147,16 +147,21 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
 #Main Program
 #*Check tied mini game for bugs and clearscreen, may need to refresh variables b/c you can max out error attempts if spamming same previously tied num
 #*Input error checking for duplicate enteries and bad values on main game.
+    #*Re-arrange user input to match current key pairs
+    #*check for duplicate key pairs
 #*Bugs: occurs when human first, but loses game. human second, but wins game. Try adding humanFirst to announcment condition
+#*Remove text redundancies in UI after firstMoveminigame()
+#*Create variable for game empty key pair template to use in print functions within main program
 exitGame = False
 errorAttempts = 0
+os.system('cls') #clear previous terminal messages
 while exitGame == False:
     try:
         playGameQ = input('Would you like to play tic-tac-toe? (yes/no): ')
         if (playGameQ.lower() == 'y') or (playGameQ.lower() =='ye') or (playGameQ.lower() =='yes'):
-            #print("\n" +'Please type desired difficulty level: ''easy'' or ''hard''') #enable if hardAI
-            #difficulty = input() #enable if hardAI
-            difficulty = 'easy' #remove if hardAI
+            #os.system('cls') #include if new AI difficulties
+            #difficulty = input(r'Please type desired difficulty level. (easy/hard): ') #Difficulty Prompt for AI levels
+            difficulty = 'easy' #remove if new AI difficulties
             os.system('cls')
             boardDataStructure = {} #Setting the game board to empty, important for repeated game functionality.
             if firstMoveMiniGame() == True: #Note, firstMoveMiniGame() includes print() in its function.
@@ -164,7 +169,8 @@ while exitGame == False:
                 playerCharacter = 'X'
                 print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
                 printGameboard(boardDataStructure) #Print gameboard
-                print("\n" + 'Please input an option from the following: (top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
+                print("\n" + 'Please input an option from the following:' +"\n" + 
+                '(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
                 boardDataStructure.setdefault(input(), 'X') #Player Move Input
                 os.system('cls')
             else:
@@ -177,7 +183,8 @@ while exitGame == False:
                 if gameContinuation(boardDataStructure) != 'unfinished':
                     break
                 print("\n" + 'You are playing as "' + playerCharacter +'".')
-                print("\n" + 'Please input an option from the following:' + "\n" +'(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
+                print("\n" + 'Please input an option from the following:' + "\n" +
+                '(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
                 boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
                 os.system('cls')
             #Winner Announcment Segment
