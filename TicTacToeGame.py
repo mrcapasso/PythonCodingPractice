@@ -165,7 +165,6 @@ def userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard): #
             sys.exit()
 
 #Main Program
-#*Bugs: occurs when human first, but loses game. human second, but wins game. Try adding humanFirst to announcment condition
 exitGame = False
 errorAttempts = 0
 emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right'] #Empty 3x3 board.
@@ -182,7 +181,7 @@ while exitGame == False:
             if firstMoveMiniGame() == True: #Note, firstMoveMiniGame() includes print() in its function.
                 humanFirst = True
                 playerCharacter = 'X'
-                print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
+                print("\n" + 'You are "X", and are playing at ' + difficulty +' difficulty.' + "\n")
                 printGameboard(boardDataStructure) #Print gameboard
                 print("\n" + 'Please input an option from the following:' +"\n" + str(emptyBoard))
                 userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input & Validation
@@ -192,20 +191,20 @@ while exitGame == False:
                 playerCharacter = 'O'
             while gameContinuation(boardDataStructure) == 'unfinished':
                 easyAI(boardDataStructure, humanFirst) #AI Move Input
+                lastMove = 'computer'
                 printGameboard(boardDataStructure) #Print gameboard
                 if gameContinuation(boardDataStructure) != 'unfinished':
                     break
                 print("\n" + 'You are playing as "' + playerCharacter +'" on ' + difficulty + ' difficulty.')
                 print("\n" + 'Please input an option from the following:' + "\n" + str(emptyBoard))
-                userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input & validation 
+                userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input & validation
+                lastMove = 'player' 
                 os.system('cls')
             os.system('cls')
             printGameboard(boardDataStructure)
-            histogram = list(boardDataStructure.values())
-            winningCharacter = max(set(histogram))
-            if gameContinuation(boardDataStructure) == 'champion' and winningCharacter == playerCharacter:
+            if gameContinuation(boardDataStructure) == 'champion' and lastMove == 'player':
                 print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
-            elif gameContinuation(boardDataStructure) == 'champion' and winningCharacter != playerCharacter:
+            elif gameContinuation(boardDataStructure) == 'champion' and lastMove == 'computer':
                 print('Sorry, you lost as ' + playerCharacter +'!' + "\n")
             elif gameContinuation(boardDataStructure) == 'draw':
                 print('You tied. Nice try!' + "\n")
