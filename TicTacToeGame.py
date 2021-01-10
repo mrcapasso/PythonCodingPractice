@@ -148,7 +148,6 @@ def userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard): #
     for i in range(1,5): #Five attempts
         try:
             userGameInput = input()
-            #emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right']
             if userGameInput.lower() in emptyBoard: #Checking if user's input appears in the empty board list
                 if userGameInput.lower() in boardDataStructure.keys(): #Checking if user's input appears as key in current game
                     print("\n" + 'That spot is already taken, please type a new spot:')
@@ -167,7 +166,6 @@ def userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard): #
 
 #Main Program
 #*Bugs: occurs when human first, but loses game. human second, but wins game. Try adding humanFirst to announcment condition
-#*Remove text redundancies in UI after firstMoveminigame()
 exitGame = False
 errorAttempts = 0
 emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right'] #Empty 3x3 board.
@@ -187,22 +185,20 @@ while exitGame == False:
                 print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
                 printGameboard(boardDataStructure) #Print gameboard
                 print("\n" + 'Please input an option from the following:' +"\n" + str(emptyBoard))
-                userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input
+                userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input & Validation
                 os.system('cls')
             else:
                 humanFirst = False
                 playerCharacter = 'O'
-                print("\n" + 'You are O, and are playing at "' + difficulty +'" difficulty.' + "\n")
             while gameContinuation(boardDataStructure) == 'unfinished':
                 easyAI(boardDataStructure, humanFirst) #AI Move Input
                 printGameboard(boardDataStructure) #Print gameboard
                 if gameContinuation(boardDataStructure) != 'unfinished':
                     break
-                print("\n" + 'You are playing as "' + playerCharacter +'".')
+                print("\n" + 'You are playing as "' + playerCharacter +'" on ' + difficulty + ' difficulty.')
                 print("\n" + 'Please input an option from the following:' + "\n" + str(emptyBoard))
-                userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input
+                userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input & validation 
                 os.system('cls')
-            #Winner Announcment Segment
             os.system('cls')
             printGameboard(boardDataStructure)
             histogram = list(boardDataStructure.values())
