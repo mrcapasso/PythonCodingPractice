@@ -144,6 +144,27 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
     else:
         boardDataStructure.setdefault(computerMove, 'X')
 
+def userEntryCollectAndCheck(boardDataStructure, playerCharacter): #Input prompt that validate's users game move with empty board keys and current game board.
+    for i in range(1,5): #Five attempts
+        try:
+            userGameInput = input()
+            emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right']
+            if userGameInput.lower() in emptyBoard: #Checking if user's input appears in the empty board list
+                if userGameInput.lower() in boardDataStructure.keys(): #Checking if user's input appears as key in current game
+                    print("\n" + 'That spot is already taken, please type a new spot:')
+                    i += 1
+                else:
+                    boardDataStructure.setdefault(userGameInput, playerCharacter)
+                    break
+            else:
+                print("\n" + 'Invalid entry, please read options and type new move:')
+                i += 1
+        except:
+            os.system('cls')
+            print('Critical error in user entry collector and checker, exiting program.')
+            os.system('pause')
+            sys.exit()
+
 #Main Program
 #*Check tied mini game for bugs and clearscreen, may need to refresh variables b/c you can max out error attempts if spamming same previously tied num
 #*Input error checking for duplicate enteries and bad values on main game.
@@ -171,7 +192,7 @@ while exitGame == False:
                 printGameboard(boardDataStructure) #Print gameboard
                 print("\n" + 'Please input an option from the following:' +"\n" + 
                 '(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
-                boardDataStructure.setdefault(input(), 'X') #Player Move Input
+                userEntryCollectAndCheck(boardDataStructure, playerCharacter) #Player Move Input
                 os.system('cls')
             else:
                 humanFirst = False
@@ -185,7 +206,7 @@ while exitGame == False:
                 print("\n" + 'You are playing as "' + playerCharacter +'".')
                 print("\n" + 'Please input an option from the following:' + "\n" +
                 '(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
-                boardDataStructure.setdefault(input(), playerCharacter) #Player Move Input
+                userEntryCollectAndCheck(boardDataStructure, playerCharacter) #Player Move Input
                 os.system('cls')
             #Winner Announcment Segment
             os.system('cls')
