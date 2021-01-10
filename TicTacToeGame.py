@@ -65,10 +65,10 @@ import os
 import random
 
 def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to determine first move. Returns true or false value if the human won.
-    randomNumber = random.randint(0,10)
-    computerChoice = random.randint(0,10)
     for i in range(0,3): #Loop for three attempts, used to error check non-valid game inputs.
         try:
+            randomNumber = random.randint(0,10)
+            computerChoice = random.randint(0,10)
             number = str(input('Please pick a number between 0 and 10: '))
             if abs(randomNumber - int(number)) == abs(randomNumber - computerChoice):
                 os.system('cls')
@@ -166,10 +166,6 @@ def userEntryCollectAndCheck(boardDataStructure, playerCharacter): #Input prompt
             sys.exit()
 
 #Main Program
-#*Check tied mini game for bugs and clearscreen, may need to refresh variables b/c you can max out error attempts if spamming same previously tied num
-#*Input error checking for duplicate enteries and bad values on main game.
-    #*Re-arrange user input to match current key pairs
-    #*check for duplicate key pairs
 #*Bugs: occurs when human first, but loses game. human second, but wins game. Try adding humanFirst to announcment condition
 #*Remove text redundancies in UI after firstMoveminigame()
 #*Create variable for game empty key pair template to use in print functions within main program
