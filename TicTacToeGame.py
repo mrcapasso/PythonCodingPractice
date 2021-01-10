@@ -144,11 +144,11 @@ def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data str
     else:
         boardDataStructure.setdefault(computerMove, 'X')
 
-def userEntryCollectAndCheck(boardDataStructure, playerCharacter): #Input prompt that validate's users game move with empty board keys and current game board.
+def userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard): #Input prompt that validate's users game move with empty board keys and current game board.
     for i in range(1,5): #Five attempts
         try:
             userGameInput = input()
-            emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right']
+            #emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right']
             if userGameInput.lower() in emptyBoard: #Checking if user's input appears in the empty board list
                 if userGameInput.lower() in boardDataStructure.keys(): #Checking if user's input appears as key in current game
                     print("\n" + 'That spot is already taken, please type a new spot:')
@@ -168,9 +168,9 @@ def userEntryCollectAndCheck(boardDataStructure, playerCharacter): #Input prompt
 #Main Program
 #*Bugs: occurs when human first, but loses game. human second, but wins game. Try adding humanFirst to announcment condition
 #*Remove text redundancies in UI after firstMoveminigame()
-#*Create variable for game empty key pair template to use in print functions within main program
 exitGame = False
 errorAttempts = 0
+emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right'] #Empty 3x3 board.
 os.system('cls') #clear previous terminal messages
 while exitGame == False:
     try:
@@ -186,9 +186,8 @@ while exitGame == False:
                 playerCharacter = 'X'
                 print("\n" + 'You are X, and are playing at ' + difficulty +' difficulty.' + "\n")
                 printGameboard(boardDataStructure) #Print gameboard
-                print("\n" + 'Please input an option from the following:' +"\n" + 
-                '(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
-                userEntryCollectAndCheck(boardDataStructure, playerCharacter) #Player Move Input
+                print("\n" + 'Please input an option from the following:' +"\n" + str(emptyBoard))
+                userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input
                 os.system('cls')
             else:
                 humanFirst = False
@@ -200,9 +199,8 @@ while exitGame == False:
                 if gameContinuation(boardDataStructure) != 'unfinished':
                     break
                 print("\n" + 'You are playing as "' + playerCharacter +'".')
-                print("\n" + 'Please input an option from the following:' + "\n" +
-                '(top-left, top-center, top-right, mid-left, mid-center, mid-right, bot-left, bot-center, bot-right)')
-                userEntryCollectAndCheck(boardDataStructure, playerCharacter) #Player Move Input
+                print("\n" + 'Please input an option from the following:' + "\n" + str(emptyBoard))
+                userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input
                 os.system('cls')
             #Winner Announcment Segment
             os.system('cls')
