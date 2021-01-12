@@ -2,13 +2,13 @@
 #Goal: Create a tic-tac-toe game using functions, data-structures, dictionaries, and lists. Purpose is to develop working familiarity with data structures, lists, and indexes.
 #Documentation Note: Comments denoted #* require further review.
 
-import sys #used everywhere
+import sys #Used everywhere
 import os #Used everywhere
 import random #Used in firstMoveMiniGame() and easyAI()
 
 #*Modify easyAI to use global emptyBoard variable. 
 
-def firstMoveMiniGame(): #Prompts user to play 0 to 10 number guessing game to determine first move. Returns true if human won, returns false if human lost.
+def firstMoveMiniGame(): #Prompts user to play guessing game to determine first move. Returns true if human won, returns false if human lost.
     for i in range(0,3): #Creating limited amount of attempts, used to validate mini-game inputs and stop infinite loop in the event of multiple ties.
         try:
             randomNumber = random.randint(0,10)
@@ -51,7 +51,7 @@ def printGameboard(boardDataStructure): #Inputs current tic-tac-toe data structu
     print(boardDataStructure.get('bot-left', ' ') + ' | ' + boardDataStructure.get('bot-center', ' ') + ' | ' + boardDataStructure.get('bot-right',' '))
     return
 
-def gameContinuation(grid): #Inputs board data structure to check game status. Returns game status as string: champion (this denotes a winner exists but not who), unfinished, or draw.
+def gameContinuation(grid): #Inputs current board to check game status. Returns game status as string: champion (this denotes a winner exists but not who), unfinished, or draw.
     try: 
         if ( #This checks for all winning combinations in a 3x3 game.
             ((grid.get('top-left') == grid.get('top-center') == grid.get('top-right')) and grid.get('top-left') != None) or  #Checking top row equality & non-empty 
@@ -75,7 +75,7 @@ def gameContinuation(grid): #Inputs board data structure to check game status. R
         os.system('pause')
         sys.exit()
 
-def easyAI(boardDataStructure, humanFirst): #Inputs current tic-tac-toe data structure, randomly chooses computer's move, and then modifies board datastructure accordingly. 
+def easyAI(boardDataStructure, humanFirst): #Inputs current game structure, randomly chooses computer's move, and then modifies board datastructure accordingly. 
     emptyBoard = {'top-left': '', 'top-center': '', 'top-right': '', 'mid-left': '', 'mid-center': '', 'mid-right': '', 'bot-left': '', 'bot-center': '', 'bot-right': ''}
         #For nxn solution, be sure to procur a datastucture with the properly notated key's as in emptyBoard above.
     emptyBoardKeysList = list(emptyBoard.keys()) #Taking key's from empty board.
@@ -111,15 +111,15 @@ def userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard): #
 #Main Program
 exitGame = False
 errorAttempts = 0
-emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right'] #Empty 3x3 board.
+emptyBoard = ['top-left', 'top-center', 'top-right', 'mid-left', 'mid-center', 'mid-right', 'bot-left', 'bot-center', 'bot-right']
 os.system('cls') #Clear previous terminal gunk
 while exitGame == False: 
     try:
         playGameQ = input('Would you like to play tic-tac-toe? (yes/no): ')
         if (playGameQ.lower() == 'y') or (playGameQ.lower() =='ye') or (playGameQ.lower() =='yes'):
-            #os.system('cls') #include if various AI difficulties
+            #os.system('cls') #Include if various AI difficulties
             #difficulty = input(r'Please type desired difficulty level. (easy/hard): ') #Difficulty prompt for various AI levels
-            difficulty = 'easy' #remove if various AI difficulties
+            difficulty = 'easy' #Remove if various AI difficulties; however, for practice project purposes, easy mode suffices.
             os.system('cls')
             boardDataStructure = {} #Setting the game board to empty, important for repeated game functionality.
             if firstMoveMiniGame() == True: #Note, firstMoveMiniGame() includes print() in its function.
@@ -142,7 +142,7 @@ while exitGame == False:
                 print("\n" + 'You are playing as "' + playerCharacter +'" on ' + difficulty + ' difficulty.')
                 print("\n" + 'Please input an option from the following:' + "\n" + str(emptyBoard))
                 userEntryCollectAndCheck(boardDataStructure, playerCharacter, emptyBoard) #Player Move Input & validation
-                #Note, the process that validates if the player ended the game here is performed in the loop's conditionality statement. 
+                #Note, the process that validates if the player ended the game at this step is performed in the loop's conditionality statement. 
                 lastMove = 'player' 
                 os.system('cls')
             os.system('cls')
