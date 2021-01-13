@@ -1,8 +1,11 @@
-#Course: Automate the Boring Stuff with Python Programming
-##Section 5: Writing a Complete Program: Guess the Number
-##URL: https://www.udemy.com/course/automate/learn/lecture/3465826?start=0#overview
+#Author: Matteo Capasso
+#Goal: Create a tic-tac-toe game using functions, data-structures, dictionaries, and lists. Purpose is to develop working familiarity with data structures, lists, and indexes.
+#Documentation Note: Comments denoted #* require further review.
 
-# Goal: Create number game. Include: 7 tries max & error checking
+#*ToDo:
+##*Fix attempts remaining showing wrong number
+##*Fix Game loop so value error doesnt terimate
+##*Consolidate text
 
 import random
 import sys
