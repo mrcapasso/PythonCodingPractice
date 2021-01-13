@@ -6,8 +6,6 @@ import sys #Used everywhere
 import os #Used everywhere
 import random #Used in firstMoveMiniGame() and easyAI()
 
-#*Modify easyAI to use global emptyBoard variable. 
-
 def firstMoveMiniGame(): #Prompts user to play guessing game to determine first move. Returns true if human won, returns false if human lost.
     for i in range(0,3): #Creating limited amount of attempts, used to validate mini-game inputs and stop infinite loop in the event of multiple ties.
         try:
@@ -75,11 +73,9 @@ def gameContinuation(grid): #Inputs current board to check game status. Returns 
         os.system('pause')
         sys.exit()
 
-def easyAI(boardDataStructure, humanFirst): #Inputs current game structure, randomly chooses computer's move, and then modifies board datastructure accordingly. 
-    emptyBoard = {'top-left': '', 'top-center': '', 'top-right': '', 'mid-left': '', 'mid-center': '', 'mid-right': '', 'bot-left': '', 'bot-center': '', 'bot-right': ''}
-        #For nxn solution, be sure to procur a datastucture with the properly notated key's as in emptyBoard above.
-    emptyBoardKeysList = list(emptyBoard.keys()) #Taking key's from empty board.
-    boardDataStrucKeysList = list(boardDataStructure.keys()) #Taking key's from current board.
+def easyAI(boardDataStructure, humanFirst, emptyBoard): #Inputs current game structure, randomly chooses computer's move, and then modifies board datastructure accordingly. 
+    emptyBoardKeysList = emptyBoard 
+    boardDataStrucKeysList = list(boardDataStructure.keys()) #Taking keys from current board.
     unfilledSquaresList = list(set(emptyBoardKeysList)^set(boardDataStrucKeysList)) #Checking for differences in the two sets of keys
     randomIndex = random.randint(0,int(len(unfilledSquaresList))-1) #Generates random number based off the length of the differenced set, unfilledSquaresList.
     computerMove = unfilledSquaresList[randomIndex] #Uses that randomly generated number to pick an element to index by.
@@ -134,7 +130,7 @@ while exitGame == False:
                 humanFirst = False
                 playerCharacter = 'O' #Note, second player to move in tic-tac-toe is always 'O'.
             while gameContinuation(boardDataStructure) == 'unfinished':
-                easyAI(boardDataStructure, humanFirst) #AI Move Input and board datastructure Change
+                easyAI(boardDataStructure, humanFirst, emptyBoard) #AI Move Input and board datastructure Change
                 lastMove = 'computer' #LastMove variable is important for winner declaration later.
                 printGameboard(boardDataStructure)
                 if gameContinuation(boardDataStructure) != 'unfinished': #Checking if computer's recent move ended game. 
@@ -147,7 +143,7 @@ while exitGame == False:
                 os.system('cls')
             os.system('cls')
             printGameboard(boardDataStructure)
-            #Winner decleration is done by checking who made the final move that led to the game reaching a 'champion' or 'draw' status. 
+            #Winner declaration is done by checking who made the final move that led to the game reaching a 'champion' or 'draw' status. 
             if gameContinuation(boardDataStructure) == 'champion' and lastMove == 'player':
                 print('Congratulations, you won as ' + playerCharacter +'!' + "\n")
             elif gameContinuation(boardDataStructure) == 'champion' and lastMove == 'computer':
