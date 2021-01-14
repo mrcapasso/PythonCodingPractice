@@ -7,8 +7,8 @@ import random
 
 MAX_GAME_ATTEMPTS = 7 #The number of rounds the user has to guess the correct answer.
 NUM_VALIDATION_ATTEMPTS = 3 #The number of invald data type enteries the user can attempt to enter.
-LOW_RAND_NUM_LIM = 1 #The lower integer of the randomly generated number.
-UP_RAND_NUM_LIM = 20 #The upper integer of the randomly generated number.
+LOW_RAND_NUM_LIM = 1 #The lower limit of the randomly generated number.
+UP_RAND_NUM_LIM = 20 #The upper limit of the randomly generated number.
 
 randomNumber = random.randint(LOW_RAND_NUM_LIM,UP_RAND_NUM_LIM)
 
@@ -18,7 +18,7 @@ name = input()
 print("Welcome " + name + '.')
 
 #Number Inquiry & Main Game
-for attempts in range(1,MAX_GAME_ATTEMPTS):
+for attempts in range(0,MAX_GAME_ATTEMPTS):
     #User Input Validation
     try: #Checking if user's integer input is between the random number bounds.
         number = input('Please input a whole number between 1 and 20: ')
