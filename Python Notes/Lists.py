@@ -6,7 +6,6 @@
 example = ['demo1', 'demo2', 'demo3']
 print(example[0])
 
-
 #Slice => New Sublist
 example = [['demo1', 'demo2', 'demo3'],['bob', 'susan', 'jack'], ['bob2', 'susan2', 'jack2']]
 print(example[1:2]) 
@@ -42,16 +41,14 @@ print([1,2]*10) #Multiplication
 test = list('Bob is my favorite person') #turns each character into a list entry
 print(test)
 
-#Note: For loops iterate over the values in a list
+#Note: 'For' loops iterate over the values in a list
 
 #Multiple Assignments
 cat = ['fat', 'orange', 'loud']
 size = cat[0]
 color = cat[1]
 disposition = cat[2]
-
     # or, we can write it as such:
-
 size, color, disposition = cat
 print(cat)
 
@@ -105,7 +102,6 @@ print(spam)
 
 #For more info on references in Python, see Facts and Myths about Python names and values: https://www.youtube.com/watch?v=_AEJHKGk9ns
 
-
 #Note: Changes to list in a function will affect the list outside the function.
 
 #Copy Module (Used to easily navigate around the mutable vs immutable data types)
@@ -116,7 +112,6 @@ cheese = copy.deepcopy(spam) #Creates brand new list off spam list and reference
 cheese[1] = 42
 print(spam)
 print(cheese)
-
 
 #Line Continuation
 spam = ['apples',

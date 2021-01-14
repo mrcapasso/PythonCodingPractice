@@ -28,7 +28,6 @@ print(example2)
 example3 = list(eggs.items())
 print(example3)
 
-
 #get(arg1, arg2) arg1 is the value to search for, arg2 is value to return if not in dictionary
 print(eggs.get('age', 0))
     #This method is good to retrieve values in dictionary; however,
@@ -54,11 +53,7 @@ pprint.pprint(histogram)
 
 # **pprint() returns pretty returns a dictionary value cleanly and pformat() function returns a string output of this value.
 
-
-
 #Data Structure Video (lesson 18)
 #A list of dictionaries is called a data-structure.
-
-#Goal: Create a tic-tac-toe game using data structures, lists, and functions. 
 
 #Type() function allows you to see type of function
