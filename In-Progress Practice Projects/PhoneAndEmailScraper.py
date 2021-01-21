@@ -15,13 +15,13 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
     (
     (\+)?         #Checking for presence of +, used in international numbers
     (\d{1,3})?    #Checking for three digit country-code , note -- sometimes less than 3 characters
-    (\s|-)?       #Checking for space or dash
+    (\ |-)?       #Checking for space or dash
     (\()?         #Checking for potential left-parenthesis
     (\d\d\d)?     #Checking for three digit area code
     (\))?         #Checking for potential right-parenthesis
-    (\s|-)?       #Checking for space or dash
+    (\ |-)?       #Checking for space or dash
     (\d\d\d)      #First part of 7-digit phone number
-    (\s|-)?       #Checking for space or dash
+    (\ |-)?       #Checking for space or dash
     (\d\d\d\d)    #Second part of 7-digit phone number
     )
     ''', re.VERBOSE) #Verbose to allow multi-line commenting
