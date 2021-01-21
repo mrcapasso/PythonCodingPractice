@@ -30,6 +30,9 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
         return 'No phone numbers.'
     else: 
         return phoneNumbers
+    #? Which is better? Multiple groups, then narrow it down
+    #? or one group from inception? Multi-group could allow for histogram
+    #? of number type to find trends... at cost of extended computation time...?
 
 ###Main Program Psuedo Code###
 #exit = false
@@ -71,14 +74,14 @@ EDUCATION
 Binghamton University, State University of New York, The Thomas J. Watson School of Engineering and Applied Science	                  
 Bachelor of Science in Computer Science 					                                  Expected May 20XX 
 Major GPA: 3.XX/4.00 | Overall GPA: 3.XX/4.00 | Dean’s List: Fall 20XX - Present
-Onondaga Community College, State University of New York							         
+Onondaga Community College, State University of New York		 +1-541-754-3010					         
 Associate of Science in Individual Studies		                                                                                          May 20XX Overall GPA: X.X/4.00 | Presidential Scholar 
 
 TECHNICAL SKILLS
-Languages: MATLAB, C++, C, X-86 Assembly
+Languages: MATLAB, C++, C, X-86 Assembly 001-541-754-3010
 Software and OS: LabWindows/CVI, Logisim, P-Spice, LabVIEW, Microsoft Suite (Word, Excel, Project), Linux, OS 10
 Additional: Digital Circuit Design, Soldering
-Spoken Language: Spanish
+Spoken Language: Spanish 754-3010
 
 
 
@@ -96,7 +99,7 @@ Student Assistant								          September 20XX – December 20XX
 
 PROJECT EXPERIENCE
 Junior Design Project: Temperature Control System						              Binghamton, NY
-Team Leader										           January 20XX – May 20XX
+Team Leader		1-541-754-3010								           January 20XX – May 20XX
 •	Led a team of four engineers to model a temperature controller that regulates temperature of a cement power resistor using voltage divider, 2-bit flash ADC, binary comparisons, and transistor circuit concepts
 •	Tested flash ADC conversion of the varying thermistor in order to utilize appropriate resistance values and choose reference voltage for the op-amp comparators of the flash ADC that will maximize temperature resolution
 Multipath Issues in Communication Systems								 Binghamton, NY Lead Developer									          September 20XX – December 20XX
