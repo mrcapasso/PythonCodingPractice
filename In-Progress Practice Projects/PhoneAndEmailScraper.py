@@ -1,10 +1,18 @@
 #Goal: Create an email and phone number parser that takes clipboard input and outputs filtered phone numbers and emails to clipboard. 
+#Help List: Consulted Automate the Boring Stuff to figure out extracting individual elements from n-tuple
 #Tip: Use regex library, pyperclip
 
 #ToDo
+#*Import pyperclip
+#*Inset pyperclip into main body function
 #*Add ext (ex: 123-4567 ext. 1234) parsing to phoneNumParser
+#*Narrow down phoneNumParser tuples to first group & create list with it
 
-import re #Used in phoneNumParser() and emailParser()
+import re #Used in phoneNumParser() and emailParser() for parsing
+import pprint #Used in main function to format parsed lists
+import os #os.system('cls'), os.system('pause')
+import sys #sys.exit(), str(sys.exc_info())
+#import pyperclip
 
 def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone Numbers or lack of
     # Demo Number Formats: Source: (https://stdcxx.apache.org/doc/stdlibug/26-1.html) Pull Date: (1/21/2021)
@@ -12,7 +20,7 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
     # (541) 754-3010 Domestic
     # +1-541-754-3010 International
     # 1-541-754-3010 Dialed in the US
-    # 001-541-754-3010n Dialed from Germany
+    # 001-541-754-3010 Dialed from Germany
     # 191 541 754 3010 Dialed from France   
     phoneNumRegex = re.compile(r'''
     (
@@ -32,8 +40,7 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
     if phoneNumbers == None:
         return 'No phone numbers.'
     else: 
-        #* Append list w/ first coordinate in tuple
-        return phoneNumbers
+        return ['754-3010', '(541) 754-3010', '001-541-754-3010'] #dummy/temp list
 
 def emailParser(textsample): #Input: String to Parse || Output: List of Emails or lack of
     emailRegex = re.compile(r'''
@@ -48,6 +55,54 @@ def emailParser(textsample): #Input: String to Parse || Output: List of Emails o
         return 'No emails.'
     else:
         return emails
+
+#Main Program
+try: 
+    failedInputs = 0
+    exit = False
+    while exit == False:
+        os.system('cls') #Clear previous terminal gunk
+        print('''
+        Welcome to the phone and email puller!
+        Please choose how you would like to input text to parse.
+        1) Copy current clipboard's text, type: clipboard
+        - or -
+        2) Exit program, type: exit
+
+        Note -- 'Ctrl+C' is the shortcut to copy text.
+        ''')
+        retrivalOption = input().lower()
+        if (retrivalOption == 'clipboard') or (retrivalOption == 'clip'):
+            print('Clipboard chosen')
+            os.system('pause')
+            #paste clipboard sample text in terminal
+            #Desire input?
+                #if no
+                        #please try again text, restarting
+                #If yes 
+                    #parse
+                    #Output to clipboard
+                    #also output to terimal in table like format
+                    #Continue / More Parsing?
+                    #if no
+                        #clip board loop exit condition
+                        #main program exit condition
+        elif (retrivalOption == 'exit') or (retrivalOption == 'esc'):
+            exit = True
+        else:
+            failedInputs += 1
+            if failedInputs >= 3:
+                print('Max input attempts reached. Exiting Program.')
+                exit = True
+            else:
+                print("\n" + 'This is an incorrect entry, please re-read the directions.')
+                os.system('pause')
+                continue            
+except:
+    print(str(sys.exc_info()))
+    print("\n" + 'Critical Error in main function -- terminating program.' + "\n")
+    os.system('pause')
+    os.system('cls')
 
 
 ###Main Program Psuedo Code###
