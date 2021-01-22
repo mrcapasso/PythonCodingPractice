@@ -3,6 +3,7 @@
 #Tip: Use regex library, pyperclip
 
 #ToDo
+#*Bug test clipboardSampleText()
 #*Import pyperclip
 #*Inset pyperclip into main body function
 #*Add ext (ex: 123-4567 ext. 1234) parsing to phoneNumParser
@@ -40,7 +41,7 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
     if phoneNumbers == None:
         return 'No phone numbers.'
     else: 
-        return ['754-3010', '(541) 754-3010', '001-541-754-3010'] #dummy/temp list
+        return ['754-3010', '(541) 754-3010', '001-541-754-3010', '1-541-754-3010'] #* dummy/temp list
 
 def emailParser(textsample): #Input: String to Parse || Output: List of Emails or lack of
     emailRegex = re.compile(r'''
@@ -56,7 +57,55 @@ def emailParser(textsample): #Input: String to Parse || Output: List of Emails o
     else:
         return emails
 
+def clipboardSampleText(textsample): #Input: String to Parse || Output: String that contains splices of main text's body for user verification
+    characterLength = 30 #Integer value representing the approx, unoptimized, number of characters needed to give the user an identifiable segment of text
+    textLength = len(textsample)
+    first = textsample(0, characterLength)
+    firstQuartile = textsample(.25*textLength, characterLength + (.25*textLength))
+    middle = textsample(.5*textLength, characterLength + (.5*textLength))
+    thirdQuartile = textsample(.75*textLength, characterLength + (.75*textLength))
+    last = textsample(textLength - characterLength, textLength)
+        #*Check no overlap between thirdQuartile and last
+    sampleText = str(first + firstQuartile + middle + thirdQuartile + last)
+    return sampleText
+    
 #Main Program
+test = '''
+Junior EE Resume
+1234 Resume Road, Binghamton, NY 12345
+(123) 456-7890 | wcac@binghamton.edu
+Binghamton University, State University of New York, The Thomas J. Watson School of Engineering and Applied Science	                  
+Bachelor of Science in Computer Science 					                                  Expected May 20XX 
+Major GPA: 3.XX/4.00 | Overall GPA: 3.XX/4.00 | Dean’s List: Fall 20XX - Present
+Onondaga Community College, State University of New York		 +1-541-754-3010					         
+Associate of Science in Individual Studies		                                                                                          May 20XX Overall GPA: X.X/4.00 | Presidential Scholar 
+TECHNICAL SKILLS
+Languages: MATLAB, C++, C, X-86 Assembly 001-541-754-3010
+Software and OS: LabWindows/CVI, Logisim, P-Spice, LabVIEW, Microsoft Suite (Word, Excel, Project), Linux, OS 10
+Additional: Digital Circuit Design, wcac@binghamton.eduSoldering
+Spoken Language: Spanish 754-3010
+Lawrence Aerospace – Liquids Dynamic Division                                                                                          New York, NY
+Firmware Intern 				wcac@binghamton.edu					            June 20XX – August 20XX
+•	Utilized object-oriented programming and GUI concepts to develop an application in Visual C# that decodes 128KB of raw data from the Non-Volatile Memory into readable information to reduce errors in packet data transmissions and decoding 
+•	Devised test procedures of both high and low level program requirements of the Bombardier C-Series main fuel-gauging computer to validate software requirements to be used by quality assurance engineers and the customer
+Watson Career and Alumni Connections							              Binghamton, NY
+Student Assistant								          September 20XX – December 20XX
+Junior Design Project: Temperature Control System						              Binghamton, NY
+Team Leader		1-541-754-3010								           January 20XX – May 20XX
+Multipath Issues in Communication Systems								 Binghamton, NY Lead Developer									          September 20XX – December 20XX
+•	Simulated communication scenarios involving multiple received signals due to environment, delay, and noise in MATLAB in order to create filters that would obtain the desired discrete-time input signal from the altered signal
+•	Analyzed the multipath system’s frequency response and its effects on the original input signal to implement FIR and IIR filters that will attenuate unwanted frequencies and amplify the desired frequencies
+“Mine-Field” Navigating Robot								              Binghamton, NY
+Team Member		 				 		abc##@binghamton.edu                       September 20XX – December 20XX
+•	Designed assembly code in Code Warrior using a MC9S08QG8 CPU, a robot kit, and servos to create a robot that navigated a “mine-field” to detect light sensors and press the button to “disarm” the mines
+•	Developed technical problem solving skills through the use of pulse-width modulation and subroutine concepts in assembly code to implement hardware and software applications
+LEADERSHIP EXPERIENCE & CAMPUS INVOLVEMENT
+Binghamton Nicaragua Initiative (BNI)								              Binghamton, NY
+Treasurer 				            				                                         January 20XX – Present
+•	Generate over $1,500 in donations to fund construction of a houses in Nicaragua through soliciting family, friends, as well as the student body at campus-wide events
+•	Cultivate language and communication skills during multiple trips to Nicaragua by contributing on the construction of houses and traveling with native around the cities of Managua, Leon, and Granada
+'''
+
 try: 
     failedInputs = 0
     exit = False
@@ -65,34 +114,51 @@ try:
         print('''
         Welcome to the phone and email puller!
         Please choose how you would like to input text to parse.
+
         1) Copy current clipboard's text, type: clipboard
         - or -
         2) Exit program, type: exit
 
-        Note -- 'Ctrl+C' is the shortcut to copy text.
         ''')
         retrivalOption = input().lower()
         if (retrivalOption == 'clipboard') or (retrivalOption == 'clip'):
             print('Clipboard chosen')
             os.system('pause')
-            #paste clipboard sample text in terminal
-            #Desire input?
-                #if no
-                        #please try again text, restarting
-                #If yes 
-                    #parse
-                    #Output to clipboard
-                    #also output to terimal in table like format
-                    #Continue / More Parsing?
-                    #if no
-                        #clip board loop exit condition
-                        #main program exit condition
+            textVerification = False
+            while textVerification == False:
+                userText = test #* temp variable to simulate pyperclip clipboard copy, replace test with pyperclip copying from clipboard
+                print(clipboardSampleText(userText))
+                sampleTextVerf = input('Does this text ressemble the text you desire to parse? (yes/no): ').lower()
+                if sampleTextVerf == 'no':
+                        os.system('cls')
+                        print('''
+                        Please take this oppurtuninty to re-copy the 
+                        text you wish to parse to your clipboard.
+
+                        Note -- 'Ctrl+C' is the keyboard shortcut to copy text.
+                        ''')
+                        os.system('pause')
+                else:
+                    os.system('pause') #* remove
+                    phoneList = phoneNumParser(userText)
+                    emailList = emailParser(userText)
+                    #* Output phoneList to clipboard here using pyperclip
+                    print('Phone List:' + "\n" + phoneList + "\n" + 'The list of phone numbers has been updated in your clipboard.' \
+                         + "\n" + 'Please paste in the appropriate document now.')
+                    os.system('pause')
+                    #* Output emailList to clipboard here using pyperclip
+                    print('Email List:' + "\n" + emailList + "\n" + 'The list of emails has been updated in your clipboard.' \
+                         + "\n" + 'Please paste in the appropriate document now.')
+                    os.system('pause')
+                    #* Continue / More Parsing?
+                    #* if input("\n" + 'Would you like to exit the program? (yes/no): ').lower() == 'no':
         elif (retrivalOption == 'exit') or (retrivalOption == 'esc'):
             exit = True
         else:
             failedInputs += 1
             if failedInputs >= 3:
                 print('Max input attempts reached. Exiting Program.')
+                os.system('pause')
                 exit = True
             else:
                 print("\n" + 'This is an incorrect entry, please re-read the directions.')
@@ -103,90 +169,3 @@ except:
     print("\n" + 'Critical Error in main function -- terminating program.' + "\n")
     os.system('pause')
     os.system('cls')
-
-
-###Main Program Psuedo Code###
-#exit = false
-#Loop Start on exit variable
-#Clipboard pull, paste option, exit?
-    #if clipboard
-        #Reset clipboard loop's argument
-        #Clipboard Loop
-            #retrive clipboard input
-            #paste clipboard sample text in terminal
-            #Desire input?
-                #if no
-                        #please try again text, restarting
-                #If yes 
-                    #parse
-                    #Output to clipboard
-                    #also output to terimal in table like format
-                    #Continue / More Parsing?
-                    #if no
-                        #clip board loop exit condition
-                        #main program exit condition
-    #elif paste option
-        #clear terminal
-        #user input string
-        #parse
-        #output to clipboard
-        #also output to terimanl in table like format
-    #else
-        #exit = true
-        #continue
-
-test = '''
-Junior EE Resume
-1234 Resume Road, Binghamton, NY 12345
-(123) 456-7890 | wcac@binghamton.edu
-
-EDUCATION
-
-Binghamton University, State University of New York, The Thomas J. Watson School of Engineering and Applied Science	                  
-Bachelor of Science in Computer Science 					                                  Expected May 20XX 
-Major GPA: 3.XX/4.00 | Overall GPA: 3.XX/4.00 | Dean’s List: Fall 20XX - Present
-Onondaga Community College, State University of New York		 +1-541-754-3010					         
-Associate of Science in Individual Studies		                                                                                          May 20XX Overall GPA: X.X/4.00 | Presidential Scholar 
-
-TECHNICAL SKILLS
-Languages: MATLAB, C++, C, X-86 Assembly 001-541-754-3010
-Software and OS: LabWindows/CVI, Logisim, P-Spice, LabVIEW, Microsoft Suite (Word, Excel, Project), Linux, OS 10
-Additional: Digital Circuit Design, wcac@binghamton.eduSoldering
-Spoken Language: Spanish 754-3010
-
-
-
-PROFESSIONAL EXPERIENCE
-
-Lawrence Aerospace – Liquids Dynamic Division                                                                                          New York, NY
-Firmware Intern 				wcac@binghamton.edu					            June 20XX – August 20XX
-•	Utilized object-oriented programming and GUI concepts to develop an application in Visual C# that decodes 128KB of raw data from the Non-Volatile Memory into readable information to reduce errors in packet data transmissions and decoding 
-•	Devised test procedures of both high and low level program requirements of the Bombardier C-Series main fuel-gauging computer to validate software requirements to be used by quality assurance engineers and the customer
-Watson Career and Alumni Connections							              Binghamton, NY
-Student Assistant								          September 20XX – December 20XX
-•	Advised students on preparing quality application materials, and provide constructive feedback to strengthen the professionalism skills necessary for a successful and rewarding career path
-•	Coordinated networking events and information sessions to assist students with connecting with engineering professionals
-•	Organized the layout and content of the career services website using OmniUpdate to provide resources and opportunities for students and alumni of Watson School of Engineering and Applied Science
-
-PROJECT EXPERIENCE
-Junior Design Project: Temperature Control System						              Binghamton, NY
-Team Leader		1-541-754-3010								           January 20XX – May 20XX
-•	Led a team of four engineers to model a temperature controller that regulates temperature of a cement power resistor using voltage divider, 2-bit flash ADC, binary comparisons, and transistor circuit concepts
-•	Tested flash ADC conversion of the varying thermistor in order to utilize appropriate resistance values and choose reference voltage for the op-amp comparators of the flash ADC that will maximize temperature resolution
-Multipath Issues in Communication Systems								 Binghamton, NY Lead Developer									          September 20XX – December 20XX
-•	Simulated communication scenarios involving multiple received signals due to environment, delay, and noise in MATLAB in order to create filters that would obtain the desired discrete-time input signal from the altered signal
-•	Analyzed the multipath system’s frequency response and its effects on the original input signal to implement FIR and IIR filters that will attenuate unwanted frequencies and amplify the desired frequencies
-“Mine-Field” Navigating Robot								              Binghamton, NY
-Team Member		 				 		abc##@binghamton.edu                       September 20XX – December 20XX
-•	Designed assembly code in Code Warrior using a MC9S08QG8 CPU, a robot kit, and servos to create a robot that navigated a “mine-field” to detect light sensors and press the button to “disarm” the mines
-•	Developed technical problem solving skills through the use of pulse-width modulation and subroutine concepts in assembly code to implement hardware and software applications
-
-LEADERSHIP EXPERIENCE & CAMPUS INVOLVEMENT
-Binghamton Nicaragua Initiative (BNI)								              Binghamton, NY
-Treasurer 				            				                                         January 20XX – Present
-•	Generate over $1,500 in donations to fund construction of a houses in Nicaragua through soliciting family, friends, as well as the student body at campus-wide events
-•	Cultivate language and communication skills during multiple trips to Nicaragua by contributing on the construction of houses and traveling with native around the cities of Managua, Leon, and Granada
-'''
-
-print(phoneNumParser(test))
-print(emailParser(test))
