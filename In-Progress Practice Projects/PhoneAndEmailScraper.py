@@ -1,7 +1,10 @@
 #Goal: Create an email and phone number parser that takes clipboard input and outputs filtered phone numbers and emails to clipboard. 
 #Tip: Use regex library, pyperclip
 
-import re
+#ToDo
+#*Add ext (ex: 123-4567 ext. 1234) parsing to phoneNumParser
+
+import re #Used in phoneNumParser() and emailParser()
 
 def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone Numbers or lack of
     # Demo Number Formats: Source: (https://stdcxx.apache.org/doc/stdlibug/26-1.html) Pull Date: (1/21/2021)
@@ -29,10 +32,23 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
     if phoneNumbers == None:
         return 'No phone numbers.'
     else: 
+        #* Append list w/ first coordinate in tuple
         return phoneNumbers
-    #? Which is better? Multiple groups, then narrow it down
-    #? or one group from inception? Multi-group could allow for histogram
-    #? of number type to find trends... at cost of extended computation time...?
+
+def emailParser(textsample): #Input: String to Parse || Output: List of Emails or lack of
+    emailRegex = re.compile(r'''
+    \S+ #Non-space values, used to include weird characters and numbers
+    @   #Required @ to signify beginning of domain section for email addresses
+    \S+ #Non-space values, used to include weird characters and numbers
+    .   #Required '.' character to signify start of domain type for email addresses
+    \S+ #Non-space values, used to include weird characters and numbers
+    ''', re.VERBOSE)
+    emails = emailRegex.findall(textsample)
+    if emails == None:
+        return 'No emails.'
+    else:
+        return emails
+
 
 ###Main Program Psuedo Code###
 #exit = false
@@ -80,7 +96,7 @@ Associate of Science in Individual Studies		                                    
 TECHNICAL SKILLS
 Languages: MATLAB, C++, C, X-86 Assembly 001-541-754-3010
 Software and OS: LabWindows/CVI, Logisim, P-Spice, LabVIEW, Microsoft Suite (Word, Excel, Project), Linux, OS 10
-Additional: Digital Circuit Design, Soldering
+Additional: Digital Circuit Design, wcac@binghamton.eduSoldering
 Spoken Language: Spanish 754-3010
 
 
@@ -88,7 +104,7 @@ Spoken Language: Spanish 754-3010
 PROFESSIONAL EXPERIENCE
 
 Lawrence Aerospace – Liquids Dynamic Division                                                                                          New York, NY
-Firmware Intern 									            June 20XX – August 20XX
+Firmware Intern 				wcac@binghamton.edu					            June 20XX – August 20XX
 •	Utilized object-oriented programming and GUI concepts to develop an application in Visual C# that decodes 128KB of raw data from the Non-Volatile Memory into readable information to reduce errors in packet data transmissions and decoding 
 •	Devised test procedures of both high and low level program requirements of the Bombardier C-Series main fuel-gauging computer to validate software requirements to be used by quality assurance engineers and the customer
 Watson Career and Alumni Connections							              Binghamton, NY
@@ -106,7 +122,7 @@ Multipath Issues in Communication Systems								 Binghamton, NY Lead Developer	
 •	Simulated communication scenarios involving multiple received signals due to environment, delay, and noise in MATLAB in order to create filters that would obtain the desired discrete-time input signal from the altered signal
 •	Analyzed the multipath system’s frequency response and its effects on the original input signal to implement FIR and IIR filters that will attenuate unwanted frequencies and amplify the desired frequencies
 “Mine-Field” Navigating Robot								              Binghamton, NY
-Team Member		 				 		                       September 20XX – December 20XX
+Team Member		 				 		abc##@binghamton.edu                       September 20XX – December 20XX
 •	Designed assembly code in Code Warrior using a MC9S08QG8 CPU, a robot kit, and servos to create a robot that navigated a “mine-field” to detect light sensors and press the button to “disarm” the mines
 •	Developed technical problem solving skills through the use of pulse-width modulation and subroutine concepts in assembly code to implement hardware and software applications
 
@@ -118,3 +134,4 @@ Treasurer 				            				                                         January 2
 '''
 
 print(phoneNumParser(test))
+print(emailParser(test))
