@@ -6,7 +6,6 @@
 #*Bug test clipboardSampleText()
 #*Import pyperclip
 #*Inset pyperclip into main body function
-#*Add ext (ex: 123-4567 ext. 1234) parsing to phoneNumParser
 #*Narrow down phoneNumParser tuples to first group & create list with it
 
 import re #Used in phoneNumParser() and emailParser() for parsing
@@ -25,16 +24,17 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
     # 191 541 754 3010 Dialed from France   
     phoneNumRegex = re.compile(r'''
     (
-    (\+)?         #Checking for presence of +, used in international numbers
-    (\d{1,3})?    #Checking for three digit country-code , note -- sometimes less than 3 characters
-    (\ |-)?       #Checking for space or dash
-    (\()?         #Checking for potential left-parenthesis
-    (\d\d\d)?     #Checking for three digit area code
-    (\))?         #Checking for potential right-parenthesis
-    (\ |-)?       #Checking for space or dash
-    (\d\d\d)      #First part of 7-digit phone number
-    (\ |-)?       #Checking for space or dash
-    (\d\d\d\d)    #Second part of 7-digit phone number
+    (\+)?               #Checking for presence of +, used in international numbers
+    (\d{1,3})?          #Checking for three digit country-code , note -- sometimes less than 3 characters
+    (\ |-)?             #Checking for space or dash
+    (\()?               #Checking for potential left-parenthesis
+    (\d\d\d)?           #Checking for three digit area code
+    (\))?               #Checking for potential right-parenthesis
+    (\ |-)?             #Checking for space or dash
+    (\d\d\d)            #First part of 7-digit phone number
+    (\ |-)?             #Checking for space or dash
+    (\d\d\d\d)          #Second part of 7-digit phone number
+    (\s(ext.|extension) \ \d*)? #'ext.' or 'extension' followed by digits
     )
     ''', re.VERBOSE) #Verbose to allow multi-line commenting
     phoneNumbers = phoneNumRegex.findall(textsample)
