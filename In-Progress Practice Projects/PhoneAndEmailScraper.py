@@ -3,7 +3,8 @@
 #Tip: Use regex library, pyperclip
 
 #ToDo
-#*Narrow down phoneNumParser tuples to first group & create list with it
+#*Narrow down phoneNumParser() tuples to first group & create list with it
+#*Bug Fix main function
 
 import re #Used in phoneNumParser() and emailParser() for parsing
 import pprint #Used in main function to format parsed lists
@@ -107,7 +108,7 @@ try:
     failedInputs = 0
     exit = False
     while exit == False:
-        os.system('cls') #Clear previous terminal gunk
+        os.system('cls')
         print('''
         Welcome to the phone and email puller!
         Please choose how you would like to input text to parse.
@@ -119,13 +120,14 @@ try:
         ''')
         retrivalOption = input().lower()
         if (retrivalOption == 'clipboard') or (retrivalOption == 'clip'):
-            print('Clipboard chosen')
             os.system('pause')
+            os.system('cls')
             textVerification = False
             while textVerification == False:
                 userText = pyperclip.paste()
                 print(clipboardSampleText(userText))
-                sampleTextVerf = input('Does this text ressemble the text you desire to parse? (yes/no): ').lower()
+                sampleTextVerf = input('\nDoes this text ressemble the text you desire to parse? (yes/no): ').lower()
+                os.system('cls')
                 if sampleTextVerf == 'no':
                         os.system('cls')
                         print('''
@@ -133,17 +135,18 @@ try:
                         text you wish to parse to your clipboard.
 
                         Note -- 'Ctrl+C' is the keyboard shortcut to copy text.
+
                         ''')
                         os.system('pause')
                 else:
                     os.system('pause') #* remove
                     phoneList = phoneNumParser(userText)
                     emailList = emailParser(userText)
-                    pyperclip.copy(phoneList)
+                    pyperclip.copy(str(phoneList))
                     print('Phone List:' + "\n" + phoneList + "\n" + 'The list of phone numbers has been updated in your clipboard.' \
                          + "\n" + 'Please paste in the appropriate document now.')
                     os.system('pause')
-                    pyperclip.copy(emailList)
+                    pyperclip.copy(str(emailList))
                     print('Email List:' + "\n" + emailList + "\n" + 'The list of emails has been updated in your clipboard.' \
                          + "\n" + 'Please paste in the appropriate document now.')
                     os.system('pause')
