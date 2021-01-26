@@ -3,7 +3,6 @@
 #Tip: Use regex library, pyperclip
 
 #ToDo
-#*Bug test clipboardSampleText()
 #*Narrow down phoneNumParser tuples to first group & create list with it
 
 import re #Used in phoneNumParser() and emailParser() for parsing
@@ -56,15 +55,15 @@ def emailParser(textsample): #Input: String to Parse || Output: List of Emails o
         return emails
 
 def clipboardSampleText(textsample): #Input: String to Parse || Output: String that contains splices of main text's body for user verification
-    characterLength = 30 #Integer value representing the approx, unoptimized, number of characters needed to give the user an identifiable segment of text
+    characterLength = 20 #Integer value representing the approx, unoptimized, number of characters needed to give the user an identifiable segment of text
     textLength = len(textsample)
-    first = textsample(0, characterLength)
-    firstQuartile = textsample(.25*textLength, characterLength + (.25*textLength))
-    middle = textsample(.5*textLength, characterLength + (.5*textLength))
-    thirdQuartile = textsample(.75*textLength, characterLength + (.75*textLength))
-    last = textsample(textLength - characterLength, textLength)
-        #*Check no overlap between thirdQuartile and last
-    sampleText = str(first + firstQuartile + middle + thirdQuartile + last)
+    first = textsample[0:characterLength]
+    firstQuartile = textsample[round(.25*textLength):round(characterLength + (.25*textLength))]
+    middle = textsample[round(.5*textLength):round(characterLength + (.5*textLength))]
+    thirdQuartile = textsample[round(.75*textLength):round(characterLength + (.75*textLength))]
+    last = textsample[textLength-characterLength:textLength]
+    i = '... ' #Spacing for return string formatting
+    sampleText = ('Sample: ' + first + i + firstQuartile + i + middle + i + thirdQuartile + i + last).replace('\n',' ')
     return sampleText
     
 #Main Program
