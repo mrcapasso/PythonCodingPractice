@@ -4,15 +4,13 @@
 
 #ToDo
 #*Bug test clipboardSampleText()
-#*Import pyperclip
-#*Inset pyperclip into main body function
 #*Narrow down phoneNumParser tuples to first group & create list with it
 
 import re #Used in phoneNumParser() and emailParser() for parsing
 import pprint #Used in main function to format parsed lists
 import os #os.system('cls'), os.system('pause')
 import sys #sys.exit(), str(sys.exc_info())
-#import pyperclip
+import pyperclip
 
 def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone Numbers or lack of
     # Demo Number Formats: Source: (https://stdcxx.apache.org/doc/stdlibug/26-1.html) Pull Date: (1/21/2021)
@@ -126,7 +124,7 @@ try:
             os.system('pause')
             textVerification = False
             while textVerification == False:
-                userText = test #* temp variable to simulate pyperclip clipboard copy, replace test with pyperclip copying from clipboard
+                userText = pyperclip.paste()
                 print(clipboardSampleText(userText))
                 sampleTextVerf = input('Does this text ressemble the text you desire to parse? (yes/no): ').lower()
                 if sampleTextVerf == 'no':
@@ -142,11 +140,11 @@ try:
                     os.system('pause') #* remove
                     phoneList = phoneNumParser(userText)
                     emailList = emailParser(userText)
-                    #* Output phoneList to clipboard here using pyperclip
+                    pyperclip.copy(phoneList)
                     print('Phone List:' + "\n" + phoneList + "\n" + 'The list of phone numbers has been updated in your clipboard.' \
                          + "\n" + 'Please paste in the appropriate document now.')
                     os.system('pause')
-                    #* Output emailList to clipboard here using pyperclip
+                    pyperclip.copy(emailList)
                     print('Email List:' + "\n" + emailList + "\n" + 'The list of emails has been updated in your clipboard.' \
                          + "\n" + 'Please paste in the appropriate document now.')
                     os.system('pause')
