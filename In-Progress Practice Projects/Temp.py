@@ -5,17 +5,34 @@ import os #os.system('cls'), os.system('pause')
 import sys #sys.exit(), str(sys.exc_info())
 import pyperclip
 
-def clipboardSampleText(textsample): #Input: String to Parse || Output: String that contains splices of main text's body for user verification
-    characterLength = 30 #Integer value representing the approx, unoptimized, number of characters needed to give the user an identifiable segment of text
-    textLength = len(textsample)
-    first = textsample(0, characterLength)
-    firstQuartile = textsample(.25*textLength, characterLength + (.25*textLength))
-    middle = textsample(.5*textLength, characterLength + (.5*textLength))
-    thirdQuartile = textsample(.75*textLength, characterLength + (.75*textLength))
-    last = textsample(textLength - characterLength, textLength)
-        #*Check no overlap between thirdQuartile and last
-    sampleText = str(first + firstQuartile + middle + thirdQuartile + last)
-    return sampleText
+def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone Numbers or lack of
+    # Demo Number Formats: Source: (https://stdcxx.apache.org/doc/stdlibug/26-1.html) Pull Date: (1/21/2021)
+    # 754-3010 Local
+    # (541) 754-3010 Domestic
+    # +1-541-754-3010 International
+    # 1-541-754-3010 Dialed in the US
+    # 001-541-754-3010 Dialed from Germany
+    # 191 541 754 3010 Dialed from France   
+    phoneNumRegex = re.compile(r'''
+    (
+    (\+)?               #Checking for presence of +, used in international numbers
+    (\d{1,3})?          #Checking for three digit country-code , note -- sometimes less than 3 characters
+    (\ |-)?             #Checking for space or dash
+    (\()?               #Checking for potential left-parenthesis
+    (\d\d\d)?           #Checking for three digit area code
+    (\))?               #Checking for potential right-parenthesis
+    (\ |-)?             #Checking for space or dash
+    (\d\d\d)            #First part of 7-digit phone number
+    (\ |-)?             #Checking for space or dash
+    (\d\d\d\d)          #Second part of 7-digit phone number
+    (\s(ext.|extension) \ \d*)? #'ext.' or 'extension' followed by digits
+    )
+    ''', re.VERBOSE) #Verbose to allow multi-line commenting
+    phoneNumbers = phoneNumRegex.findall(textsample)
+    if phoneNumbers == None:
+        return 'No phone numbers.'
+    else: 
+        return ['754-3010', '(541) 754-3010', '001-541-754-3010', '1-541-754-3010'] #* dummy/temp list
 
 test = '''
 Junior EE Resume
@@ -53,4 +70,4 @@ Treasurer 				            				                                         January 2
 •	Cultivate language and communication skills during multiple trips to Nicaragua by contributing on the construction of houses and traveling with native around the cities of Managua, Leon, and Granada
 '''
 
-print(clipboardSampleText(test))
+print(phoneNumParser(test))
