@@ -32,7 +32,10 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
     if phoneNumbers == None:
         return 'No phone numbers.'
     else: 
-        return ['754-3010', '(541) 754-3010', '001-541-754-3010', '1-541-754-3010'] #* dummy/temp list
+        list = []
+        for i in phoneNumbers:
+            list.append(i[0]) #Appending by the beginning element of i, which is the full phone number.
+        return list
 
 test = '''
 Junior EE Resume
