@@ -1,9 +1,5 @@
 #Goal: Create an email and phone number parser that takes clipboard input and outputs filtered phone numbers and emails to clipboard. 
-#Help List: Consulted Automate the Boring Stuff to figure out extracting individual elements from n-tuple
 #Tip: Use regex library, pyperclip
-
-#ToDo
-#*Bug Fix main function
 
 import re #Used in phoneNumParser() and emailParser() for parsing
 import pprint #Used in main function to format parsed lists
@@ -141,15 +137,14 @@ try:
                         ''')
                         os.system('pause')
                 else:
-                    os.system('pause') #* remove
                     phoneList = phoneNumParser(userText)
                     emailList = emailParser(userText)
                     pyperclip.copy(str(phoneList))
-                    print('Phone List:' + "\n" + phoneList + "\n" + 'The list of phone numbers has been updated in your clipboard.' \
+                    print('Phone List:' + "\n" + str(phoneList) + "\n" + 'The list of phone numbers has been updated in your clipboard.' \
                          + "\n" + 'Please paste in the appropriate document now.')
                     os.system('pause')
                     pyperclip.copy(str(emailList))
-                    print('Email List:' + "\n" + emailList + "\n" + 'The list of emails has been updated in your clipboard.' \
+                    print('Email List:' + "\n" + str(emailList) + "\n" + 'The list of emails has been updated in your clipboard.' \
                          + "\n" + 'Please paste in the appropriate document now.')
                     os.system('pause')
                     #* Continue / More Parsing?
