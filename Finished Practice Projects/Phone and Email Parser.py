@@ -7,7 +7,7 @@ import sys #sys.exit(), str(sys.exc_info())
 import pyperclip
 
 def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone Numbers or lack of
-    # Demo Number Formats: Source: (https://stdcxx.apache.org/doc/stdlibug/26-1.html) Pull Date: (1/21/2021)
+    # Demo Number Formats: Source: (https://stdcxx.apache.org/doc/stdlibug/26-1.html) Retrieval Date: (1/21/2021)
     # 754-3010 Local
     # (541) 754-3010 Domestic
     # +1-541-754-3010 International
@@ -16,26 +16,26 @@ def phoneNumParser(textsample): #Input: String to Parse || Output: List of Phone
     # 191 541 754 3010 Dialed from France   
     phoneNumRegex = re.compile(r'''
     (
-    (\+)?               #Checking for presence of +, used in international numbers
-    (\d{1,3})?          #Checking for three digit country-code , note -- sometimes less than 3 characters
-    (\ |-)?             #Checking for space or dash
-    (\()?               #Checking for potential left-parenthesis
-    (\d\d\d)?           #Checking for three digit area code
-    (\))?               #Checking for potential right-parenthesis
-    (\ |-)?             #Checking for space or dash
-    (\d\d\d)            #First part of 7-digit phone number
-    (\ |-)?             #Checking for space or dash
-    (\d\d\d\d)          #Second part of 7-digit phone number
+    (\+)?                       #Checking for presence of +, used in international numbers
+    (\d{1,3})?                  #Checking for three digit country-code , note -- sometimes less than 3 characters
+    (\ |-)?                     #Checking for space or dash
+    (\()?                       #Checking for potential left-parenthesis
+    (\d\d\d)?                   #Checking for three digit area code
+    (\))?                       #Checking for potential right-parenthesis
+    (\ |-)?                     #Checking for space or dash
+    (\d\d\d)                    #First part of 7-digit phone number
+    (\ |-)?                     #Checking for space or dash
+    (\d\d\d\d)                  #Second part of 7-digit phone number
     (\s(ext.|extension) \ \d*)? #'ext.' or 'extension' followed by digits
     )
     ''', re.VERBOSE) #Verbose to allow multi-line commenting
     phoneNumbers = phoneNumRegex.findall(textsample)
     if phoneNumbers == None:
-        return 'No phone numbers.'
+        return 'No phone numbers found.'
     else: 
         list = []
         for i in phoneNumbers:
-            list.append(i[0]) #Appending by the beginning element of i, which is the full phone number.
+            list.append(i[0]) #Appending by the first element of i, which is the full phone number.
         return list
 
 def emailParser(textsample): #Input: String to Parse || Output: List of Emails or lack of
@@ -48,7 +48,7 @@ def emailParser(textsample): #Input: String to Parse || Output: List of Emails o
     ''', re.VERBOSE)
     emails = emailRegex.findall(textsample)
     if emails == None:
-        return 'No emails.'
+        return 'No emails found.'
     else:
         return emails
 
@@ -135,7 +135,7 @@ except:
     os.system('cls')
 
 
-# Testing Document
+### Testing Document ###
 # Junior EE Resume
 # 1234 Resume Road, Binghamton, NY 12345
 # (123) 456-7890 | wcac@binghamton.edu
