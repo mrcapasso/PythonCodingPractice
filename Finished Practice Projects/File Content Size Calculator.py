@@ -23,5 +23,3 @@ if os.path.exists(targetFile) == True:
     print('Total Size: ' + str(round((totalSize/1000000000),3)) + ' Gb')
 else:
     raise Exception('Nonexistent file or directory.')
-
-#D:\
