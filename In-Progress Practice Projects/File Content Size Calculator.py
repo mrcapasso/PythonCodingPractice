@@ -9,19 +9,16 @@ print('Welcome to the file size calculator!')
 targetFile = input('Please input the filepath of the directory whose contents you would like checked:\n')
 if os.path.exists(targetFile) == True:
     os.chdir(targetFile) #Changes working directory to target file directory
-    directoryList = os.listdir(os.getcwd()) #Lists files in current working directory
-    #* Append directoryList for folders or different module than .listdir()?
-    directoryList.sort(key=str.lower) #Sorting Contents in alphabetical order
-    totalSize = 0
-    for i in directoryList:
-        ithFileSize = os.path.getsize(os.path.abspath(i)) #Storing ith filesize to variables
-        totalSize += ithFileSize
-        print(os.path.basename(i) + ": " + str(ithFileSize) + ' bytes')
+    totalSize = 0 
+    for foldername, subfolders, filenames in os.walk(targetFile):
+        os.chdir(foldername)
+        for i in filenames:
+            ithFileSize = os.path.getsize(os.path.abspath(i)) #Storing ith filesize to variables
+            totalSize += ithFileSize
     print("\n" + '='*30 + "\n" + 'Total Size: ' + str(totalSize) + ' bytes')
     print('Total Size: ' + str(round((totalSize/1000),3)) + ' kb')
     print('Total Size: ' + str(round((totalSize/1000000),3)) + ' Mb')
     print('Total Size: ' + str(round((totalSize/1000000000),3)) + ' Gb')
+    print()
 else:
     raise Exception('Nonexistent file or directory.')
-
-#D:\
