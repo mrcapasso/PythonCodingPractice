@@ -5,3 +5,5 @@ https://www.amazon.com/Python-Crash-Course-Hands-Project-Based/dp/1593276036
 https://github.com/learnbyexample/scripting_course/blob/master/Python_curated_resources.md#code-practice
 
 Download all the comic pictures from xkcd.com w/ and w/o selenium, project idea: automate the boring stuff
+
+Create a bot that takes a picture and turns it into an excel csv based on pixels and cells
