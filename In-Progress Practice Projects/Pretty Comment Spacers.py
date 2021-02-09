@@ -2,29 +2,33 @@
 
 import os, pyperclip
 
+pattern1 = '#*!' #Notification base pattern
+pattern2 = '#*?' #Question base pattern
+pattern3 = '#'   
 
-
-#Psuedocode
-#function: Pattern Display
-#function: Format String 
-
-#Loop 1 Start
-    #Clearscreen
-    #Welcome Prompt
-    #Display Decorative Type Patterns
-    #Pick Decorative Type, assign variable
-    #Loop 2 Start
-        #Your text will be copied notification.
-        #Copy text
-        #Strip Text
-        #Text + Pattern String Function
-        #Print String (Small Size, medium size, large size)
-        #pick desired string
-            #small, medium, or large
-                #paste to clipboard
-                #exit loop 2
-            #else
-                #loop 2 again
-    #Format another string? 
-        #if no
-            #exit loop 1
+exit = False
+while exit == False:
+    os.system('cls')
+    print('Welcome to the pretty comment spacers script.\n\n\
+    Please choose a pattern type:\n\
+    1) %s \n\
+    2) %s \n\
+    3) %s \n' % (pattern1, pattern2, pattern3))
+    patternType = input('(1,2,3): ')
+    if int(patternType) not in range(1,3): #User Input Check (Valid Choice Selection)
+        raise Exception('Invalid Pattern Selection Number')
+    clipboardLoopExit = False
+    while clipboardLoopExit == False:
+        os.system('cls')
+        print('''
+        Please take this oppurtunity to copy 
+        the single line of text you would 
+        like centered.
+        ''')
+        os.system('pause')
+        clipboard = pyperclip.paste()
+        if '\n' in clipboard: #User Input Check (Valid Choice Selection)
+            raise Exception('Clipboard had multiple line text option')
+        clipboard.strip()
+        os.system('cls')
+    
