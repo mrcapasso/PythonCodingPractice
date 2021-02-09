@@ -30,5 +30,9 @@ while exit == False:
         if '\n' in clipboard: #User Input Check (Valid Choice Selection)
             raise Exception('Clipboard had multiple line text option')
         clipboard.strip()
+        print(clipboard)
+        verfication = input('Is this the desired text? (yes/no): ')
+        if verfication.lower() == 'no' or verfication.lower() == 'esc':
+            break #Restarting program.
         os.system('cls')
     
