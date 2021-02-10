@@ -1,6 +1,7 @@
 #Goal: Create a program that will generate nice code comment spacers for blocking off coding segments.
 
 import os, pyperclip
+from Psuedocode import patternFormatter #*Operational, but still needs to be optimized
 
 pattern1 = '#*!' #Notification base pattern
 pattern2 = '#*?' #Question base pattern
@@ -23,16 +24,33 @@ while exit == False:
         print('''
         Please take this oppurtunity to copy 
         the single line of text you would 
-        like centered.
+        like modifiyed to your clipboard.
         ''')
         os.system('pause')
-        clipboard = pyperclip.paste()
-        if '\n' in clipboard: #User Input Check (Valid Choice Selection)
-            raise Exception('Clipboard had multiple line text option')
-        clipboard.strip()
-        print(clipboard)
-        verfication = input('Is this the desired text? (yes/no): ')
-        if verfication.lower() == 'no' or verfication.lower() == 'esc':
-            break #Restarting program.
         os.system('cls')
-    
+        clipboard = pyperclip.paste()
+        clipboard.strip()
+        print(clipboard + "\n")
+        verfication = input('Is this the text you want formatted? (yes/no): ')
+        if verfication.lower() == 'no':
+            clipboard = input('\nType the text you want formatted: ')
+        os.system('cls')
+        justOptions = ['left', 'center', 'right']
+        justification = input('Please choose a text justification.\n' + str(justOptions) + ': ')
+        os.system('cls')
+        if justification not in justOptions:
+            raise Exception('Not a valid justification option.')
+
+        standardOption = patternFormatter(patternType, clipboard, justification, 80)
+        pyperclip.copy(standardOption)
+        print(
+            'Small):\n' + patternFormatter(patternType, clipboard, justification, 40) + "\n" + 
+            'Standard):\n' + standardOption + "\n" +
+            'Large):\n' + patternFormatter(patternType, clipboard, justification, 120) + "\n"*2 +
+            'Note: The standard option was copied to your clipboard by default.\n'
+        )
+        os.system('pause')
+        if input('Would you like to exit? (yes/no): ').lower() is 'yes':
+            clipboardLoopExit = True
+            exit = True
+            break
