@@ -57,3 +57,4 @@ a = patternFormatter('#', 'function testing', 'center', 250)
 os.system('cls')
 print(a)
 print(len(a))
+
