@@ -1,60 +1,64 @@
-#Potential Features List:
-#Option for Custom Character String Pattern
-#Option to center, left justify, right justify
-#Option for symmetry, think of dummy variables to simplify code
-#Optimize Run-Time by replacing for loop in patternFormatter()
-
-
-#Psuedocode
-#function: Pattern Display
-
-
-        #Text + Pattern String Function
-        #Print String (Small Size, medium size, large size)
-        #pick desired string
-            #small, medium, or large
-                #paste to clipboard
-                #exit loop 2
-            #else
-                #loop 2 again
-    #Format another string? 
-        #if no
-            #exit loop 1
-
-#############################################################################################################################(function testing)#############################################################################################################################            
+#Find #! for remaining fixes. 
 
 import os, pyperclip
 
 def patternFormatter(pattern, text, justification, length):
-    #Function Input Pre-Check
     if justification not in ['center','left','right']:
         raise AssertionError('Improper Justification Option')
     if length <= 0 or (length%1 != 0): #Checking for positive integer.
         raise AssertionError('Improper Length Option')
     if pattern == None:
         raise AssertionError('Improper Pattern') 
-    #*! Create Assertion to validate proper len of text and pattern
-    #Function Code
-    text.strip() #*? Not working? 
+    #! Check if assertion style is correct
+    #! Add assertion if text is too long
+    #! Add assertion if pattern is too long 
+    text = text.strip()
     text = '(' + text + ')'
     finalString = text
     if justification == 'center':
-        for i in range(0, round(length/2)): #*! Modify upper limit to adjust accordingly
-            finalString = pattern + finalString + pattern[::-1]
-            #Reversed pattern is important for maintaining symmetry
+        charsForPattern = length - len(text)
+        charPerSide = charsForPattern/2
+        if charPerSide%len(pattern) == 0: #Checking for formatting niceness.
+            for i in range(0, round(charPerSide/len(pattern))):
+                finalString = pattern + finalString + pattern[::-1]
+                #Reversed pattern is important for maintaining symmetry
+        else: #Ugly Case: Creates a slightly larger&centered string, then truncates end.
+            for i in range(0, round((charPerSide+1)/len(pattern))):
+                finalString = pattern + finalString + pattern[::-1]
+            finalString = finalString[0:length]
         return finalString
     elif justification == 'left':
-        finalString = '#' + finalString #Specific to left justified, mean't to prevent errors in compiling.
-        for i in range(0, length): #*! Modify upper limit to adjust accordingly
-            finalString = finalString + pattern[::-1]
+        unusedChars = length - len(text)
+        if unusedChars%len(pattern) == 0: #Nice Case
+            finalString = pattern + text + pattern*(int(unusedChars/len(pattern))-1)
+            #Note, the minus one here is because I added a pattern at the beginning of finalString
+            #so in order to ensure proper sectioning I reduced the multiplication at the end
+        else: #Ugly Case, here I create a slightly larger string then truncate.
+            finalString = pattern*(round(unusedChars/len(pattern))+1)
+            finalString = pattern + text + finalString
+            finalString = finalString[0:length]
         return finalString
-    else: #Right Justified Option
-        for i in range(0, round(((length-len(text))/len(pattern)))): #*! Modify upper limit to adjust accordingly
-            finalString = pattern + finalString
+    elif justification == 'right':
+        unusedChars = length - len(text)
+        if unusedChars%len(pattern) == 0: #Nice Case
+            finalString = pattern*int(unusedChars/len(pattern)) + text
+        else: #Ugly Case, here I create a slightly larger string then truncate.
+            finalString = pattern*(round(unusedChars/len(pattern))+1)
+            finalString = finalString[0:(length-len(text))] + text
         return finalString
 
-a = patternFormatter('#', 'function testing', 'center', 250)
-os.system('cls')
-print(a)
-print(len(a))
 
+#Stress Test, Checking Conditions
+# import random
+# randomIndex = random.randint(1,100)
+# randomIndexSmall = random.randint(0,3)
+# justification = ['right', 'center', 'left']
+
+# patternList = []
+# for i in range(1,101):
+#     patternList.append('#*!'*i)
+
+# for i in range(1,100):
+#     print(
+#         patternFormatter(patternList[randomIndex], 'Section', 'center', 80)
+#       )
