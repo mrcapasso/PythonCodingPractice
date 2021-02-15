@@ -8,7 +8,7 @@ Repository so you can follow along with my practice!
 
 **Status**: [██████████] 100%
 
-################################################################################
+
 
 **Course**: GitHub Ultimate: Master Git and Github - Beginner to Expert
 
@@ -16,7 +16,7 @@ Repository so you can follow along with my practice!
 
 **Status**: [█░░░░░░░░░] 10%
 
-################################################################################
+
 
 **Course**: Learn Python Programming Masterclass
 
@@ -24,7 +24,7 @@ Repository so you can follow along with my practice!
 
 **Status**: [████░░░░░░] 45%
 
-################################################################################
+
 
 **Course**: Python for Data Science and Machine Learning Bootcamp
 
@@ -32,7 +32,7 @@ Repository so you can follow along with my practice!
 
 **Status**: [░░░░░░░░░░] 0%
 
-################################################################################
+
 
 **Course**: 2021 Complete Python Bootcamp From Zero to Hero (Many Exercises)
 
@@ -40,7 +40,7 @@ Repository so you can follow along with my practice!
 
 **Status**: [░░░░░░░░░░] 0%
 
-################################################################################
+
 
 **Course**: Machine Learning with Python (Tensorflow, Neural Net, ML)
 
@@ -48,7 +48,7 @@ Repository so you can follow along with my practice!
 
 **Status**: [░░░░░░░░░░] 0%
 
-################################################################################
+
 
 **Course**: Data Analysis with Python 
         (Networking, API, Web Services, SQL, Visualization)
@@ -57,7 +57,7 @@ Repository so you can follow along with my practice!
 
 **Status**: [░░░░░░░░░░] 0%
 
-################################################################################
+
 
 **Course**: Scientific Computing with Python 
         (Networking, API, Web Services, SQL, Visualization)
