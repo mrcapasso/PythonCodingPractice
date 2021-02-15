@@ -6,7 +6,7 @@ Repository so you can follow along with my practice!
 
 **URL**: https://www.udemy.com/share/101W8UBUsaeVhTTXg=/
 
-**Status**: Completed 2/15/2021
+**Status**: [██████████] 100%
 
 ################################################################################
 
@@ -14,7 +14,7 @@ Repository so you can follow along with my practice!
 
 **URL**: https://www.udemy.com/share/101XzEBUsaeVhTTXg=/
 
-**Status**: In-Progress
+**Status**: [█░░░░░░░░░] 10%
 
 ################################################################################
 
@@ -22,7 +22,7 @@ Repository so you can follow along with my practice!
 
 **URL**: https://www.udemy.com/share/101WaiBUsaeVhTTXg=/
 
-**Status**: In-Progress
+**Status**: [████░░░░░░] 45%
 
 ################################################################################
 
@@ -30,7 +30,7 @@ Repository so you can follow along with my practice!
 
 **URL**: https://www.udemy.com/share/101WaUBUsaeVhTTXg=/
 
-**Status**: Pending
+**Status**: [░░░░░░░░░░] 0%
 
 ################################################################################
 
@@ -38,7 +38,7 @@ Repository so you can follow along with my practice!
 
 **URL**: https://www.udemy.com/share/101W8QBUsaeVhTTXg=/
 
-**Status**: Pending
+**Status**: [░░░░░░░░░░] 0%
 
 ################################################################################
 
@@ -46,7 +46,7 @@ Repository so you can follow along with my practice!
 
 **URL**: https://www.freecodecamp.org/learn/machine-learning-with-python/
 
-**Status**: Pending
+**Status**: [░░░░░░░░░░] 0%
 
 ################################################################################
 
@@ -55,7 +55,7 @@ Repository so you can follow along with my practice!
 
 **URL**: https://www.freecodecamp.org/learn/data-analysis-with-python/
 
-**Status**: Pending
+**Status**: [░░░░░░░░░░] 0%
 
 ################################################################################
 
@@ -64,7 +64,7 @@ Repository so you can follow along with my practice!
 
 **URL**: https://www.freecodecamp.org/learn/scientific-computing-with-python/
 
-**Status**: Pending
+**Status**: [░░░░░░░░░░] 0%
 
 
 
