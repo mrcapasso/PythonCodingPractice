@@ -1,8 +1,12 @@
 #Author: Matteo Capasso
-#Goal: Create a collection of functions to easily generate markdown formats and graphics.
-#Source: Original ideas.
+#Email: matteo@capasso.dev
+#Purpose: This module was created to simplify common markdown formatting processes. 
+    #Note: Run this .py file for a print() demo of contained functions.
+#Module: This contains the following...
+    #createMDStatusBar() - Creates an Unicode status bar graphic with adjustable width and optional text.
+    #createMDTable() - Creates a markdown table with headers and rows.
 
-def createTextStatusBar(percentDone: int, width: int = 12, numText: bool = True) -> str: #Finished
+def createMDStatusBar(percentDone: int, width: int = 12, numText: bool = True) -> str: #Finished
     """Creates an Unicode status bar graphic with adjustable width and optional text.
     
     Args:
@@ -72,8 +76,12 @@ def orderList(*listitems): #WIP
     pass
 
 if __name__ == "__main__":
-    import os, sys
+    import os
     os.system('cls')
-    print(createMDTable(10, 'Sam', 'green', 'eggs', 'and', 'ham'))
-    os.system('pause')
-    os.system('cls')
+    print(''
+        + 'MD Status Bar Demo:' + "\n" 
+        + createMDStatusBar(66) + "\n"*2
+        + 'Create MD Table Demo:' + "\n" 
+        + createMDTable(3, 'Date','Store','Item','Price') + "\n"
+    )
+    
