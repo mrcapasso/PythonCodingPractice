@@ -1,6 +1,5 @@
 #Author: Matteo Capasso
 #Email: matteo@capasso.dev
-<<<<<<< HEAD
 #Purpose: This module was created to simplify common markdown formatting processes and syntax. 
 #Demo: Run this .py file as is for a print() demo of contained functions.
 #Function List:
@@ -12,17 +11,9 @@
     #* GitHub has its on Markdown syntax called GFM
     #* GFM Syntax: https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf
 #Question: How to document *arg for preferred type
-=======
-#Purpose: This module was created to simplify common markdown formatting processes. 
-    #Note: Run this .py file for a print() demo of contained functions.
-#Module: This contains the following...
-    #createMDStatusBar() - Creates an Unicode status bar graphic with adjustable width and optional text.
-    #createMDTable() - Creates a markdown table with user defined headers and rows.
->>>>>>> 65469b85d4d31c1a1dfc34b557cb399087509396
 
 def createMDStatusBar(percentDone: int, width: int = 12, numLabel: bool = True) -> str:
     """Creates a unicode status bar graphic with adjustable width.
-    
     Args:
         percentDone (int): Percent complete of project.
         width (int): The character width of the desired status bar.
@@ -32,7 +23,6 @@ def createMDStatusBar(percentDone: int, width: int = 12, numLabel: bool = True) 
 
     Examples:
         print(generateStatusBar(66))
-
     """
     fillChar = '█'
     emptyChar = '░'
@@ -47,15 +37,8 @@ def createMDStatusBar(percentDone: int, width: int = 12, numLabel: bool = True) 
     )
     return statusBar
 
-<<<<<<< HEAD
 def createMDTable(rows: int, *headers: str) -> str:
     """Creates a markdown table with variable rows and user defined headers.
-=======
-
-def createMDTable(rows: int, *headers: str) -> str: #Finished
-    """Creates a markdown table with user defined headers and rows.
->>>>>>> 65469b85d4d31c1a1dfc34b557cb399087509396
-    
     Args:
        rows (int): The number of non-header rows desired in table. 
        *headers (str): The table's desired text headers.
@@ -107,7 +90,6 @@ def createMDNumList(*listItems, startNum:int = 1) -> str:
 
 def createMDTaskList(*listItems:str, checked:bool = False) -> str:
     """Creates a markdown task list string.
-
     Args:
        *listItems (str): Individual lines of the list.
        checked (bool): Enable or disable to have all lines checked.
@@ -134,7 +116,6 @@ if __name__ == "__main__":
     print(''
         + 'createMDStatusBar() Demo:' + "\n" 
         + createMDStatusBar(66) + "\n"*2
-<<<<<<< HEAD
 
         + 'createMDTable() Demo:' + "\n" 
         + createMDTable(3, 'Date','Store','Item','Price') + "\n"*2
@@ -146,10 +127,4 @@ if __name__ == "__main__":
         + createMDTaskList('Eat','Drink','Sleep','Code', checked=True)
     )
     os.system('pause')
-=======
-        + 'createMDTable() Demo:' + "\n" 
-        + createMDTable(3, 'Date','Store','Item','Price') + "\n"
-    )
-    os.system('pause')
     
->>>>>>> 65469b85d4d31c1a1dfc34b557cb399087509396
