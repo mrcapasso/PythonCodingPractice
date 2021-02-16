@@ -28,8 +28,34 @@ def createStatusBar(percentDone: int, width: int = 12, numText: bool = True) -> 
     return statusBar
 
 
-def generateTable(*headers, rows): #WIP
-    pass
+def createTable(rows: int, *headers: str): #WIP
+    
+    rows = int(rows) #Precautionary
+    headerLineString = ' | '.join(headers)
+    maxHeaderLen = max(headers)
+    print(maxHeaderLen)
+    oldMaxHeadLen = 0
+    for head in headers:
+        headLength = len(head)
+        if headLength > oldMaxHeadLen: 
+            oldMaxHeadLen = headLength
+
+    #Line Break String
+    breakSegment = '-'*oldMaxHeadLen
+    for i in enumerate(headers):
+    
+    #Create Rows
+
+    # Example Table:
+    # word1 | word2 | word3
+    # ----- | ----- | -----
+    # ##### | ##### | #####
+    # ##### | ##### | #####
+    # ##### | ##### | #####
+    # ##### | ##### | #####
+    
+    return table
+
 
 def fenceCodeBlock(): #WIP
     pass
@@ -39,6 +65,7 @@ def orderList(*listitems): #WIP
 
 if __name__ == "__main__":
     import os, sys
-    print(createStatusBar(66))
+    os.system('cls')
+    print(createTable(2, 'sam', 'green', 'eggs', 'and', 'ham'))
     os.system('pause')
     os.system('cls')
