@@ -4,7 +4,7 @@
     #Note: Run this .py file for a print() demo of contained functions.
 #Module: This contains the following...
     #createMDStatusBar() - Creates an Unicode status bar graphic with adjustable width and optional text.
-    #createMDTable() - Creates a markdown table with headers and rows.
+    #createMDTable() - Creates a markdown table with user defined headers and rows.
 
 def createMDStatusBar(percentDone: int, width: int = 12, numText: bool = True) -> str: #Finished
     """Creates an Unicode status bar graphic with adjustable width and optional text.
@@ -34,7 +34,7 @@ def createMDStatusBar(percentDone: int, width: int = 12, numText: bool = True) -
 
 
 def createMDTable(rows: int, *headers: str) -> str: #Finished
-    """Creates a markdown table with headers and rows.
+    """Creates a markdown table with user defined headers and rows.
     
     Args:
        rows (int): The number of non-header rows desired in table. 
@@ -79,9 +79,10 @@ if __name__ == "__main__":
     import os
     os.system('cls')
     print(''
-        + 'MD Status Bar Demo:' + "\n" 
+        + 'createMDStatusBar() Demo:' + "\n" 
         + createMDStatusBar(66) + "\n"*2
-        + 'Create MD Table Demo:' + "\n" 
+        + 'createMDTable() Demo:' + "\n" 
         + createMDTable(3, 'Date','Store','Item','Price') + "\n"
     )
+    os.system('pause')
     
