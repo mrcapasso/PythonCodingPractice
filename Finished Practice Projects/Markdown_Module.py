@@ -1,18 +1,24 @@
 #Author: Matteo Capasso
 #Email: matteo@capasso.dev
-#Purpose: This module was created to simplify common markdown formatting processes. 
-    #Note: Run this .py file for a print() demo of contained functions.
-#Module: This contains the following...
-    #createMDStatusBar() - Creates an Unicode status bar graphic with adjustable width and optional text.
-    #createMDTable() - Creates a markdown table with headers and rows.
+#Purpose: This module was created to simplify common markdown formatting processes and syntax. 
+#Demo: Run this .py file as is for a print() demo of contained functions.
+#Function List:
+    #* See invidual function documentation for further details. 
+    ## createMDStatusBar() - Creates a unicode status bar graphic.
+    ## createMDTable() - Creates a markdown table with variable rows user defined headers.
+#Notes: 
+    #* These types of formatting are best used with monospaced typeface.
+    #* GitHub has its on Markdown syntax called GFM
+    #* GFM Syntax: https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf
+#Question: How to document *arg for preferred type
 
-def createMDStatusBar(percentDone: int, width: int = 12, numText: bool = True) -> str: #Finished
-    """Creates an Unicode status bar graphic with adjustable width and optional text.
+def createMDStatusBar(percentDone: int, width: int = 12, numLabel: bool = True) -> str:
+    """Creates a unicode status bar graphic with adjustable width.
     
     Args:
         percentDone (int): Percent complete of project.
         width (int): The character width of the desired status bar.
-        numText (bool): Enable or disable percent number at end of bar.
+        numLabel (bool): Enable or disable percent number at end of bar.
     Returns:
         str: A unicode status bar graphic with optional percent number.
 
@@ -25,16 +31,16 @@ def createMDStatusBar(percentDone: int, width: int = 12, numText: bool = True) -
     fillWidth = round((percentDone/100)*(width-2))
     emptyWidth = (width-2) - fillWidth
     #(width-2) because of '[' and ']' concatenation
+    numLabelText = str(percentDone) + '% '
     statusBar = (
-        '[' + str(fillChar*fillWidth) \
-            + str(emptyChar*emptyWidth) + '] ' \
-            + str(percentDone) + '%'
+        '[' + str(fillChar*fillWidth)
+            + str(emptyChar*emptyWidth) + '] '
+            + numLabel*numLabelText
     )
     return statusBar
 
-
-def createMDTable(rows: int, *headers: str) -> str: #Finished
-    """Creates a markdown table with headers and rows.
+def createMDTable(rows: int, *headers: str) -> str:
+    """Creates a markdown table with variable rows and user defined headers.
     
     Args:
        rows (int): The number of non-header rows desired in table. 
@@ -43,7 +49,7 @@ def createMDTable(rows: int, *headers: str) -> str: #Finished
         str: A string containing the full markdown table
             template with headers
     Example: 
-        createMDTable(5, 'Date', 'Client', 'Service')
+        print(createMDTable(5, 'Date', 'Client', 'Service'))
     """
     #Creating Table's Header String
     oldMaxHeadLen = 0
@@ -66,22 +72,62 @@ def createMDTable(rows: int, *headers: str) -> str: #Finished
     )
     return table
 
-def paragraphOutline(): #WIP
-    pass
+def createMDNumList(*listItems, startNum:int = 1) -> str:
+    """Creates a markdown numeric list string.
+    Args:
+       *listItems (str): Individual lines of the list.
+       startNum (int): What number the list should start with.
+    Returns:
+        str: A string containing a markdown formatted numeric list.
+    Example:
+        print(createMDNumList('Go Run', 'Go Eat', 'Go Home'))
+    """
+    numListString = ''
+    for i in enumerate(listItems, start=startNum):
+        lineString = (''
+            + str(i[0]) + ') '
+            + str(i[1]) + "\n"
+            )
+        numListString = numListString + lineString
+    return numListString
 
-def fenceCodeBlock(): #WIP
-    pass
+def createMDTaskList(*listItems:str, checked:bool = False) -> str:
+    """Creates a markdown task list string.
 
-def orderList(*listitems): #WIP
-    pass
+    Args:
+       *listItems (str): Individual lines of the list.
+       checked (bool): Enable or disable to have all lines checked.
+    Returns:
+        str: A string containing a markdown formatted task list.
+    Example:
+        print(createMDTaskList('Eat','Drink','Sleep','Code'))
+    """
+    taskListString = ''
+    for item in listItems: 
+        lineList = (''
+        + r'- ['
+        + (r'X'*checked) 
+        + r'] ' 
+        + str(item) 
+        + '\n'
+        )
+        taskListString = taskListString + lineList
+    return taskListString
 
 if __name__ == "__main__":
     import os
     os.system('cls')
     print(''
-        + 'MD Status Bar Demo:' + "\n" 
+        + 'createMDStatusBar() Demo:' + "\n" 
         + createMDStatusBar(66) + "\n"*2
-        + 'Create MD Table Demo:' + "\n" 
-        + createMDTable(3, 'Date','Store','Item','Price') + "\n"
+
+        + 'createMDTable() Demo:' + "\n" 
+        + createMDTable(3, 'Date','Store','Item','Price') + "\n"*2
+
+        + 'createMDNumList() Demo:' + "\n"
+        + createMDNumList('Go Outside','Think about food','Go back inside','Take a nap') + "\n"
+        
+        + 'createMDTaskList() Demo:' + "\n"
+        + createMDTaskList('Eat','Drink','Sleep','Code', checked=True)
     )
-    
+    os.system('pause')
