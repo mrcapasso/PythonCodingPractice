@@ -57,7 +57,7 @@ def createMDTable(rows: int, *headers: str) -> str:
             oldMaxHeadLen = currentHeadLength
     #Creating Tabel's Line Break and Body Strings
     (a, b) = ([], [])
-    for i in enumerate(headers):
+    for _ in enumerate(headers):
         a.append('-' * oldMaxHeadLen)
         b.append('#' * oldMaxHeadLen)
     lineBreakString = ' | '.join(a)
@@ -105,8 +105,7 @@ def createMDTaskList(*listItems:str, checked:bool = False) -> str:
         + (r'X'*checked) 
         + r'] ' 
         + str(item) 
-        + '\n'
-        )
+        + '\n')
         taskListString = taskListString + lineList
     return taskListString
 

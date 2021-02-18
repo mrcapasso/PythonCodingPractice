@@ -1,8 +1,11 @@
+WIP
+
+--Future Practice Projects--
 ToDo: Backup Script for Cloud, Python Module Lookup[Documentation and Popularity]
 
 Reviewed Idea Lists and Aggregators:
 (Matteo C.): http://www.capasso.dev
-Ideas: Status Bar ASCII Graphic, Grocery Receipt Crossreferencer, Local Youtube Library, Budget Tracker from Mint, Reciept Tracker for Taxes, 
+Ideas: RegEx Module, LLCFInder, Grocery Receipt Crossreferencer, Local Youtube Library, Budget Tracker from Mint, Reciept Tracker for Taxes, 
 
 (Unknown):
 Ideas: Media>PicToExcelCell
