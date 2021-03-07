@@ -1,7 +1,7 @@
 WIP
 
 --Future Practice Projects--
-ToDo: Backup Script for Cloud, Python Module Lookup[Documentation and Popularity]
+ToDo: Safe shutdown for seismic activity, Backup Script for Cloud, Python Module Lookup[Documentation and Popularity]
 
 Reviewed Idea Lists and Aggregators:
 (Matteo C.): http://www.capasso.dev
